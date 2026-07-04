@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WILCO — Your AI radio crew for DCS World</title>
+<meta name="description" content="WILCO puts a full AI radio crew in DCS World — Ground, Tower, Approach, AWACS and JTAC on your SRS frequencies. Real procedures, real voices, real attitude.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khossam963-png.github.io/wilco/">
+<meta property="og:title" content="WILCO — Your AI radio crew for DCS World">
+<meta property="og:description" content="Ground, Tower, Approach, AWACS and JTAC on your SRS frequencies. Real procedures, real voices, real attitude. Talk to your tower like a real human.">
+<meta property="og:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WILCO — Your AI radio crew for DCS World">
+<meta name="twitter:description" content="Talk to your tower like a real human. A complete AI radio crew for DCS over SRS.">
+<meta name="twitter:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23e8fff3' stroke-width='2.5'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050506; --frame:#0a0a0c; --card:#101013; --card2:#131317;
+    --line:rgba(255,255,255,.065); --line2:rgba(255,255,255,.12);
+    --txt:#f4f4f5; --body:#9d9da6; --dim:#5e5e68;
+    --acc:#34d399;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{color:var(--body);font:16px/1.6 var(--sans);
+       -webkit-font-smoothing:antialiased;overflow-x:hidden;
+       background:
+         radial-gradient(1100px 700px at 88% 0%,rgba(62,195,216,.08),transparent 62%),
+         radial-gradient(950px 750px at 0% 42%,rgba(52,211,153,.075),transparent 58%),
+         radial-gradient(1000px 800px at 100% 88%,rgba(52,211,153,.06),transparent 60%),
+         var(--bg);
+       /* viewport-anchored: EVERY screenful of the page carries the same tint */
+       background-attachment:fixed,fixed,fixed,scroll}
+  /* whisper of grain over the whole page — kills the "flat black void" */
+  body::before{content:"";position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.5;
+       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+       mix-blend-mode:overlay}
+  h1,h2,h3{color:var(--txt);letter-spacing:-.025em;font-weight:600}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1104px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+
+  .rev{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .rev.in{opacity:1;transform:none}
+
+  /* ============ nav ============ */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.25s}
+  nav.scrolled{background:rgba(5,5,6,.72);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:32px;height:60px;
+      max-width:1200px;margin:0 auto;padding:0 28px}
+  .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);
+      color:var(--txt);letter-spacing:.14em}
+  .nav-links{display:flex;gap:26px;font-size:13.5px;color:var(--body)}
+  .nav-links a:hover{color:var(--txt)}
+  .nav-cta{margin-left:auto}
+
+  /* buttons — quiet, Raycast-style pills */
+  .btn{display:inline-flex;align-items:center;gap:8px;font:500 13.5px var(--sans);
+      padding:8px 18px;border-radius:99px;border:1px solid var(--line2);
+      color:var(--txt);transition:.16s;cursor:pointer;background:rgba(255,255,255,.03)}
+  .btn:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+  .btn.solid{background:#fff;border-color:#fff;color:#0b0b0d;font-weight:600}
+  .btn.solid:hover{background:#e9e9ee;transform:translateY(-1px)}
+  .btn.big{padding:11px 24px;font-size:14.5px}
+
+  /* ============ hero (inset frame + aurora art) ============ */
+  .stage{padding:74px 14px 0}
+  .hero{position:relative;border-radius:20px;overflow:hidden;
+      background:var(--frame);border:1px solid var(--line);
+      padding:104px 24px 84px;text-align:center;isolation:isolate}
+  /* painterly diagonal streaks */
+  .aurora{position:absolute;inset:0;z-index:-2;overflow:hidden}
+  .aurora i{position:absolute;display:block;border-radius:50%;
+      filter:blur(34px);transform:rotate(-24deg)}
+  /* a cluster of bold diagonal strokes sweeping through the center */
+  .aurora i:nth-child(1){width:1050px;height:170px;left:6%;top:120px;opacity:.72;
+      background:linear-gradient(90deg,transparent 4%,#0f6b49 26%,#37e6a0 52%,#124b57 78%,transparent 96%)}
+  .aurora i:nth-child(2){width:1250px;height:210px;right:-220px;top:250px;opacity:.5;
+      background:linear-gradient(90deg,transparent,#0e5163 28%,#3ec3d8 55%,#0d5a3f 80%,transparent)}
+  .aurora i:nth-child(3){width:820px;height:120px;left:-100px;top:330px;opacity:.55;
+      background:linear-gradient(90deg,transparent,#12724e 38%,#7cf0c0 62%,transparent 90%)}
+  .aurora i:nth-child(4){width:900px;height:130px;right:-40px;top:20px;opacity:.45;
+      background:linear-gradient(90deg,transparent,#0c4a35 30%,#2fd894 58%,transparent 88%)}
+  .aurora i:nth-child(5){width:700px;height:90px;left:24%;top:470px;opacity:.4;
+      background:linear-gradient(90deg,transparent,#155e43 40%,#4ce0a8 62%,transparent)}
+  /* film grain + vignette keep it painterly, not "CSS glow" */
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.85;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+      background:radial-gradient(115% 85% at 50% 16%,transparent 34%,rgba(5,5,6,.82) 100%)}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--mono);
+      letter-spacing:.14em;color:#b9c6bf;border:1px solid rgba(255,255,255,.14);
+      border-radius:99px;padding:6px 15px;background:rgba(10,10,12,.5);
+      backdrop-filter:blur(6px);margin-bottom:30px}
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--acc);
+      animation:pulse 2.2s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .hero h1{font-size:clamp(42px,6.4vw,76px);line-height:1.02;font-weight:700;
+      letter-spacing:-.035em;max-width:880px;margin:0 auto 24px;
+      text-shadow:0 2px 40px rgba(0,0,0,.5)}
+  .hero p.sub{font-size:17.5px;line-height:1.65;max-width:560px;margin:0 auto 36px;
+      color:#c9c9d2;text-shadow:0 1px 20px rgba(0,0,0,.6)}
+  .hero .ctas{display:flex;gap:12px;justify-content:center;margin-bottom:22px}
+  .hero .note{font:12.5px var(--mono);color:#8b8b96;letter-spacing:.02em}
+  .hero .note b{color:#c9c9d2;font-weight:500}
+
+  /* the dial — WILCO's signature: a radio band with the five stations.
+     Ticks, labels and the marker all live on ONE percentage axis (0/25/50/75/100)
+     so the marker lands EXACTLY on a tick, and every label sits under its tick. */
+  .dial{max-width:680px;margin:54px auto 0;padding:0 34px}
+  .ticks{position:relative;height:16px}
+  .ticks::before{content:"";position:absolute;inset:0;
+      background:
+        repeating-linear-gradient(90deg,rgba(255,255,255,.26) 0 1px,transparent 1px 25%),
+        linear-gradient(90deg,transparent calc(100% - 1px),rgba(255,255,255,.26) calc(100% - 1px)),
+        repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 1px,transparent 1px 5%);
+      -webkit-mask:linear-gradient(90deg,#000,#000);mask:linear-gradient(90deg,#000,#000)}
+  .ticks .marker{position:absolute;left:25%;top:-4px;bottom:-4px;width:3px;
+      margin-left:-1px;border-radius:1px;
+      background:var(--acc);box-shadow:0 0 10px rgba(52,211,153,.8);
+      transition:left .6s cubic-bezier(.45,0,.2,1)}
+  .ticks .marker.tx{animation:txpulse 1s ease-in-out infinite}
+  @keyframes txpulse{50%{box-shadow:0 0 18px rgba(52,211,153,1);
+      filter:brightness(1.4)}}
+  .freqs{position:relative;height:36px;margin-top:10px}
+  .freqs span{position:absolute;left:var(--x,50%);transform:translateX(-50%);top:0;
+      font:500 10px var(--mono);letter-spacing:.1em;color:#4c4c55;
+      display:flex;flex-direction:column;gap:1px;align-items:center;
+      transition:color .4s;white-space:nowrap}
+  .freqs span:nth-child(1){--x:0%}
+  .freqs span:nth-child(2){--x:25%}
+  .freqs span:nth-child(3){--x:50%}
+  .freqs span:nth-child(4){--x:75%}
+  .freqs span:nth-child(5){--x:100%}
+  .freqs span b{font-weight:500;color:#77777f;transition:color .4s}
+  .freqs span.tuned{color:rgba(52,211,153,.75)}
+  .freqs span.tuned b{color:var(--acc)}
+
+  /* screenshot — its own moment, cleanly below the hero frame */
+  .shot-stage{position:relative;max-width:1010px;margin:34px auto 0;padding:0 24px}
+  .shot{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.14);
+      background:#0c0c0f;
+      box-shadow:0 60px 140px rgba(0,0,0,.75),0 12px 40px rgba(0,0,0,.5)}
+  .shot .bar{display:flex;align-items:center;gap:7px;height:36px;padding:0 15px;
+      background:#141418;border-bottom:1px solid var(--line)}
+  .shot .bar i{width:10px;height:10px;border-radius:50%;background:#26262c}
+  .shot .bar span{margin-left:10px;font:11.5px var(--mono);color:var(--dim)}
+
+  /* ---- the living Control Station miniature ---- */
+  .cs{--ground:#e8b06e;--tower:#7ce7b8;--approach:#6ec8e8;--awacs:#b9a3f5;--fac:#f0997a;
+      background:#070709;font-size:11px}
+  .cs-head{display:flex;align-items:center;gap:14px;padding:10px 16px;
+      border-bottom:1px solid var(--line);background:#0a0a0d;position:relative;overflow:hidden;
+      white-space:nowrap}
+  .cs-head::before{content:"";position:absolute;inset:-30px -5%;opacity:.3;pointer-events:none;
+      background:radial-gradient(360px 70px at 15% 130%,rgba(52,211,153,.3),transparent 70%)}
+  .cs-brand{display:flex;align-items:center;gap:8px;font:600 12px var(--sans);
+      letter-spacing:.14em;color:var(--txt);white-space:nowrap}
+  .cs-brand em{font:500 8px var(--mono);letter-spacing:.2em;color:var(--dim);font-style:normal}
+  .cs-meta{font:9.5px var(--mono);color:var(--dim);overflow:hidden;flex:0 1 auto;
+      text-overflow:ellipsis}
+  .cs-meta b{color:var(--body);font-weight:500}
+  .cs-clock{color:var(--acc);margin-left:8px}
+  .cs-pills{margin-left:auto;display:flex;gap:3px;flex-wrap:nowrap}
+  .cs-pills span{display:flex;align-items:center;gap:4px;font:500 7.5px var(--mono);
+      letter-spacing:.08em;padding:2.5px 7px;border-radius:99px;
+      border:1px solid var(--line);color:#43434c}
+  .cs-pills span::before{content:"";width:4px;height:4px;border-radius:50%;background:#26262c}
+  .cs-pills span.on{color:#cfe9dc;border-color:rgba(52,211,153,.25)}
+  .cs-pills span.on::before{background:var(--acc);box-shadow:0 0 6px rgba(52,211,153,.7)}
+  .cs-body{display:grid;grid-template-columns:1fr 224px;height:426px}
+  .cs-left{display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--line)}
+  .cs-loghead{display:flex;align-items:center;gap:10px;padding:8px 14px;
+      font:500 8.5px var(--mono);letter-spacing:.22em;color:var(--dim);
+      border-bottom:1px solid var(--line)}
+  .cs-loghead em{font-style:normal;color:var(--acc);letter-spacing:.14em}
+  .cs-log{flex:1;overflow:hidden;padding:10px 14px;display:flex;flex-direction:column;
+      background:radial-gradient(360px 200px at 8% 112%,rgba(52,211,153,.05),transparent 70%)}
+  .cs-log:empty::before{content:"— frequency clear —";margin:auto;
+      font:10px var(--mono);letter-spacing:.22em;color:#3c3c45}
+  .cs-r{display:flex;gap:9px;align-items:baseline;padding:2.5px 0;animation:csin .3s ease-out}
+  @keyframes csin{from{opacity:0;transform:translateY(5px)}}
+  .cs-r .t{color:#3c3c45;font:9px var(--mono);flex:0 0 42px}
+  .cs-r .w{flex:0 0 44px;font:500 7.5px var(--mono);letter-spacing:.06em;text-align:center;
+      color:var(--c,#5e5e68);border:1px solid color-mix(in srgb,var(--c,#555) 30%,transparent);
+      background:color-mix(in srgb,var(--c,#555) 6%,transparent);border-radius:99px;padding:1px 0}
+  .cs-r .x{flex:1;font:10.5px/1.55 var(--mono);white-space:pre-wrap;word-break:break-word;
+      color:color-mix(in srgb,var(--c,#9d9da6) 62%,#e8e8ee 30%)}
+  .cs-r.pilot .w{border-style:dashed;opacity:.7}
+  .cs-r.pilot .x{color:#dfdfe6}
+  .cs-side{display:flex;flex-direction:column;gap:8px;padding:10px;overflow:hidden;
+      background:#09090b}
+  .cs-mod{border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+      background:linear-gradient(180deg,#111114,#0e0e11)}
+  .cs-mod h4{font:500 8px var(--mono);letter-spacing:.22em;color:var(--dim);margin-bottom:9px}
+  .cs-btns{display:flex;gap:5px;flex-wrap:wrap}
+  .cs-b{font:600 9.5px var(--sans);padding:5px 10px;border-radius:99px;
+      border:1px solid var(--line2);color:var(--body)}
+  .cs-b.w{background:#fff;border-color:#fff;color:#0b0b0d}
+  .cs-b.r{color:#f87171;border-color:rgba(248,113,113,.3)}
+  .cs-row2{display:flex;gap:5px;margin-bottom:7px}
+  .cs-f{flex:1;min-width:0;display:flex;flex-direction:column}
+  .cs-f label{font:500 6.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;
+      color:#43434c;margin-bottom:3px}
+  .cs-in{display:block;font:9.5px var(--mono);color:var(--body);background:rgba(0,0,0,.35);
+      border:1px solid var(--line);border-radius:6px;padding:4px 8px;white-space:nowrap;
+      overflow:hidden}
+  .cs-hint{font:8.5px var(--sans);color:#4a4a54;margin-top:8px;line-height:1.5}
+  .cs-hint b{color:#5e5e68;font-weight:500}
+  .cs-tg{display:flex;align-items:center;gap:7px;font:10px var(--sans);color:var(--body);
+      padding:2.5px 0}
+  .cs-tg i{width:20px;height:11px;border-radius:99px;background:rgba(52,211,153,.22);
+      border:1px solid rgba(52,211,153,.45);position:relative;flex:0 0 auto}
+  .cs-tg i::after{content:"";position:absolute;top:1px;right:1px;width:7px;height:7px;
+      border-radius:50%;background:var(--acc)}
+
+  /* live transcript strip under the shot */
+  .livebar{max-width:720px;margin:26px auto 0;padding:0 24px}
+  .livebox{border:1px solid var(--line);border-radius:10px;background:rgba(12,12,15,.7);
+      padding:13px 18px;display:flex;gap:12px;align-items:baseline}
+  .livebox .lab{font:500 10.5px var(--mono);letter-spacing:.14em;color:var(--dim);
+      flex:0 0 auto;display:flex;align-items:center;gap:7px}
+  .livebox .lab i{width:6px;height:6px;border-radius:50%;background:var(--acc);
+      animation:pulse 1.6s infinite}
+  .xline{font:13px/1.5 var(--mono);color:#d6d6de;min-height:20px}
+  .xline b{color:var(--dim);font-weight:400}
+  .caret{display:inline-block;width:7px;height:13px;background:#d6d6de;
+      vertical-align:-2px;animation:pulse 1s steps(2) infinite}
+
+  /* ============ statement (Linear-style two-tone) ============ */
+  .statement{padding:150px 0 0}
+  .statement p{font-size:clamp(24px,3.1vw,34px);line-height:1.35;font-weight:600;
+      letter-spacing:-.02em;max-width:900px;color:#55555e}
+  .statement p b{color:var(--txt);font-weight:600}
+
+  /* stats — quiet inline row under a tick ruler */
+  .ruler{height:10px;margin-top:60px;
+      background:
+        repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 12.5%),
+        repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 1px,transparent 1px 2.5%);
+      -webkit-mask:linear-gradient(90deg,#000 82%,transparent);
+      mask:linear-gradient(90deg,#000 82%,transparent)}
+  .stats{display:flex;gap:56px;flex-wrap:wrap;padding-top:30px}
+  .stat b{display:block;font:600 24px var(--sans);color:var(--txt);letter-spacing:-.02em}
+  .stat span{font:12.5px var(--mono);color:var(--dim)}
+
+  /* ============ sections ============ */
+  section{padding:130px 0 0}
+  .kicker{font:500 11.5px var(--mono);color:var(--dim);letter-spacing:.24em;
+      text-transform:uppercase;display:block;margin-bottom:16px}
+  .kicker::before{content:"— ";color:var(--acc)}
+  .sec-head{max-width:660px;margin-bottom:56px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(30px,3.8vw,44px);line-height:1.1;font-weight:700;
+      letter-spacing:-.03em;margin-bottom:16px}
+  .sec-head p{font-size:16.5px;color:var(--body)}
+
+  /* crew — each member carries the band, with its own station marked */
+  .crew{display:grid;grid-template-columns:repeat(5,1fr)}
+  .member{padding:6px 22px 10px;border-left:1px solid var(--line);transition:.2s}
+  .member:first-child{border-left:none;padding-left:0}
+  .member:hover h3{color:var(--pc,#fff)}
+  .member .band{position:relative;height:10px;margin-bottom:14px;
+      background:repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px)}
+  .member .band i{position:absolute;left:var(--mk,50%);top:-3px;bottom:-3px;width:2px;
+      background:var(--pc,var(--acc));
+      box-shadow:0 0 8px color-mix(in srgb,var(--pc,var(--acc)) 70%,transparent)}
+  .member .freq{font:500 12px var(--mono);color:var(--pc,var(--acc));display:block;
+      margin-bottom:12px}
+  .member h3{font-size:16.5px;margin-bottom:7px;font-weight:600;transition:.2s}
+  .member p{font-size:13.5px;color:var(--dim);line-height:1.6}
+
+  /* features — numbered rail + one sticky live exchange that proves each point */
+  .fx{display:grid;grid-template-columns:1fr 1.08fr;gap:64px;align-items:start}
+  .fx-list{display:flex;flex-direction:column}
+  .fxi{padding:26px 0;border-top:1px solid var(--line)}
+  .fxi:first-child{border-top:none;padding-top:4px}
+  .fxi .n{font:500 11px var(--mono);color:var(--acc);letter-spacing:.1em}
+  .fxi h3{font-size:17.5px;font-weight:600;margin:9px 0 7px}
+  .fxi p{font-size:14px;color:var(--dim);line-height:1.65;max-width:400px}
+  .fx-demo{position:sticky;top:92px}
+  .term{border:1px solid var(--line2);border-radius:14px;background:#09090c;
+      overflow:hidden;box-shadow:0 40px 110px rgba(0,0,0,.6)}
+  .term .tbar{display:flex;align-items:center;gap:7px;height:38px;padding:0 16px;
+      background:#121216;border-bottom:1px solid var(--line)}
+  .term .tbar i{width:10px;height:10px;border-radius:50%;background:#232329}
+  .term .tbar span{margin-left:8px;font:11.5px var(--mono);color:var(--dim)}
+  .term .tbar em{margin-left:auto;font:10px var(--mono);color:var(--acc);
+      display:flex;align-items:center;gap:6px;font-style:normal;letter-spacing:.14em}
+  .term .tbar em::before{content:"";width:6px;height:6px;border-radius:50%;
+      background:var(--acc);animation:pulse 1.6s infinite}
+  .term .tb{padding:20px 22px 24px;font:12.5px/2.05 var(--mono)}
+  .term .who{display:inline-block;width:52px;font-size:10px;letter-spacing:.08em;
+      color:var(--dim)}
+  .term .y{color:#e3e3ea}.term .g{color:#7ce7b8}.term .d{color:var(--dim)}
+  .term .p{color:#b9a3f5}
+  .fn{font:500 10px var(--mono);color:var(--acc);border:1px solid rgba(52,211,153,.28);
+      background:rgba(52,211,153,.06);border-radius:5px;padding:1px 6px;margin-left:9px;
+      white-space:nowrap;vertical-align:1px}
+
+  /* trio — the "taxi line": three steps connected along one dashed track */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;position:relative}
+  .trio::before{content:"";position:absolute;left:14px;right:6%;top:15px;height:1px;
+      background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 7px,transparent 7px 14px)}
+  .trio h3{font-size:16.5px;margin-bottom:8px}
+  .trio p{font-size:14px;color:var(--dim);line-height:1.65}
+  .trio .num{position:relative;font:500 11.5px var(--mono);color:var(--acc);
+      display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+      border:1px solid rgba(52,211,153,.3);border-radius:99px;background:var(--bg);
+      margin-bottom:16px}
+  .trio .cmd{display:inline-block;margin-top:14px;font:12px var(--mono);color:var(--body);
+      border:1px solid var(--line);border-radius:8px;background:#0a0a0d;padding:7px 12px}
+  .trio .cmd b{color:var(--acc);font-weight:500}
+
+  /* beta */
+  .beta-card{position:relative;overflow:hidden;border:1px solid var(--line2);
+      border-radius:18px;padding:56px;background:var(--frame);isolation:isolate;
+      display:grid;grid-template-columns:1.35fr 1fr;gap:46px;align-items:center}
+  .beta-card .aurora i{filter:blur(56px);opacity:.16}
+  .beta-card h2{font-size:30px;letter-spacing:-.03em;margin-bottom:12px}
+  .beta-card ul{list-style:none;margin-top:20px;display:grid;gap:10px}
+  .beta-card li{display:flex;gap:12px;font-size:14.5px;align-items:baseline;color:#c9c9d2}
+  .beta-card li::before{content:"";width:5px;height:5px;border-radius:50%;
+      background:var(--acc);flex:0 0 auto;transform:translateY(-2px)}
+  .price-box{position:relative;text-align:center;
+      border:1px solid var(--line2);border-radius:14px;
+      padding:38px 30px;background:rgba(5,5,6,.55);backdrop-filter:blur(8px)}
+  /* the border beam — a glow that travels continuously around the rectangle */
+  @property --beam{syntax:'<angle>';initial-value:0deg;inherits:false}
+  .price-box::before{content:"";position:absolute;inset:-1px;border-radius:inherit;
+      padding:1.5px;pointer-events:none;
+      background:conic-gradient(from var(--beam),
+        transparent 0deg,transparent 288deg,
+        rgba(52,211,153,.5) 318deg,#7df0c0 338deg,rgba(52,211,153,.5) 352deg,
+        transparent 360deg);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      animation:beam 5s linear infinite}
+  .price-box::after{content:"";position:absolute;inset:-1px;border-radius:inherit;
+      padding:3px;pointer-events:none;opacity:.55;filter:blur(7px);
+      background:conic-gradient(from var(--beam),
+        transparent 0deg,transparent 295deg,
+        rgba(52,211,153,.8) 335deg,transparent 360deg);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      animation:beam 5s linear infinite}
+  @keyframes beam{to{--beam:360deg}}
+  .price-box .p{font:700 46px var(--sans);letter-spacing:-.04em;color:var(--txt)}
+  .price-box .per{font:12px var(--mono);color:var(--dim);margin:4px 0 24px}
+  .price-box .sys{margin-top:16px;font:11.5px var(--mono);color:var(--dim)}
+
+  /* faq */
+  .faq{max-width:720px;margin:0 auto;counter-reset:q}
+  details{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:16px;
+      padding:20px 4px;font:500 15.5px var(--sans);color:var(--txt);counter-increment:q}
+  summary::before{content:"Q·0" counter(q);font:500 10.5px var(--mono);color:var(--dim);
+      letter-spacing:.12em;flex:0 0 40px}
+  summary:hover::before{color:var(--acc)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font:300 20px var(--sans);color:var(--dim);transition:.2s;
+      margin-left:auto}
+  details[open] summary::after{transform:rotate(45deg)}
+  details[open] summary::before{color:var(--acc)}
+  details p{padding:0 4px 22px 60px;font-size:14.5px;max-width:660px;color:var(--body)}
+
+  /* final — the bookend: mirrors the hero */
+  .final{padding:130px 14px 14px}
+  .final-frame{position:relative;overflow:hidden;isolation:isolate;text-align:center;
+      border-radius:20px;border:1px solid var(--line);background:var(--frame);
+      padding:96px 24px 78px;max-width:none}
+  .final-frame .aurora i{opacity:.28;filter:blur(40px)}
+  .final-frame::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.7;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay}
+  .final h2{font-size:clamp(32px,4.6vw,54px);letter-spacing:-.035em;line-height:1.06;
+      margin-bottom:16px;font-weight:700}
+  .final p{margin-bottom:34px;font-size:17px;color:#c9c9d2}
+  .final .dial{margin-top:50px}
+  footer{border-top:1px solid var(--line);padding:34px 0 42px}
+  footer .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+  footer .fine{font-size:12px;color:var(--dim);max-width:600px;line-height:1.6}
+  footer .logo{font-size:14px}
+  footer .right{margin-left:auto;font:12px var(--mono);color:var(--dim)}
+
+  @media (max-width:900px){
+    .nav-links{display:none}
+    .crew{grid-template-columns:1fr;gap:0}
+    .member{border-left:none;border-top:1px solid var(--line);padding:18px 0}
+    .feat{grid-template-columns:1fr}
+    .cell.wide{grid-template-columns:1fr}
+    .trio{grid-template-columns:1fr}
+    .beta-card{grid-template-columns:1fr;padding:34px}
+    .stats{gap:32px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="logo" href="#">
+      <svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
+      WILCO
+    </a>
+    <div class="nav-links">
+      <a href="#crew">The crew</a>
+      <a href="#features">Features</a>
+      <a href="features.html">Everything it does</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn solid" href="#beta">Get the beta</a>
+    </div>
+  </div>
+</nav>
+
+<div class="stage">
+  <header class="hero">
+    <div class="aurora"><i></i><i></i><i></i><i></i><i></i></div>
+    <span class="eyebrow"><i></i>FOR DCS WORLD · OVER SRS</span>
+    <h1 class="rev in">Talk to your tower<br>like a real human.</h1>
+    <p class="sub rev in">A complete AI radio crew on your frequencies — Ground, Tower,
+      Approach, AWACS and JTAC. Real procedures, real voices, real attitude.</p>
+    <div class="ctas rev in">
+      <a class="btn solid big" href="#beta">Get the beta</a>
+      <a class="btn big" href="#features">See what it does</a>
+    </div>
+    <div class="note rev in">free beta · <b><a href="access.html" style="color:inherit;text-decoration:underline">get your invite code</a>, nothing to buy</b> · no accounts, no API keys</div>
+
+    <!-- the WILCO dial — five stations on the band, tuned to Tower -->
+    <div class="dial rev in" aria-hidden="true">
+      <div class="ticks"><i class="marker" id="dial-marker"></i></div>
+      <div class="freqs" id="dial-freqs">
+        <span data-pos="GND"><b>251.0</b>GND</span><span class="tuned" data-pos="TWR"><b>252.0</b>TWR</span>
+        <span data-pos="APP"><b>253.0</b>APP</span><span data-pos="AWACS"><b>254.0</b>AWACS</span>
+        <span data-pos="FAC"><b>255.0</b>FAC</span>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="shot-stage rev in">
+  <div class="shot">
+    <div class="bar"><i></i><i></i><i></i><span>WILCO — Control Station</span></div>
+    <!-- a real, living miniature of the Control Station -->
+    <div class="cs">
+      <div class="cs-head">
+        <div class="cs-brand">
+          <svg width="15" height="15" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.6"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.6"/></svg>
+          WILCO <em>CONTROL STATION</em>
+        </div>
+        <div class="cs-meta">SYS <b>v1.0</b> · <b>BILBEIS</b> · <b>SONNET-5</b><span
+          class="cs-clock" id="cs-clock">--:--:--</span></div>
+        <div class="cs-pills">
+          <span class="on">FEED</span><span>SRS</span><span>SPEECH</span><span class="on">GND</span><span class="on">TWR</span><span>APP</span><span class="on">AWACS</span><span class="on">FAC</span>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="cs-left">
+          <div class="cs-loghead">COMMS — LIVE TRAFFIC <em>● ON NET</em></div>
+          <div class="cs-log" id="cs-log"></div>
+        </div>
+        <div class="cs-side">
+          <div class="cs-mod">
+            <h4>— MASTER</h4>
+            <div class="cs-btns"><span class="cs-b w">▶ Start all</span><span class="cs-b r">■ Stop all</span><span class="cs-b">Debrief</span></div>
+            <div class="cs-hint"><b>Start</b> brings up SRS + speech + all five controllers.</div>
+          </div>
+          <div class="cs-mod">
+            <h4>— CONTROLLER</h4>
+            <div class="cs-row2"><span class="cs-f"><label>Brain</label><span class="cs-in">Sonnet 5 ▾</span></span>
+              <span class="cs-f"><label>Personality</label><span class="cs-in">Movie ▾</span></span></div>
+            <div class="cs-row2"><span class="cs-f"><label>Airfield</label><span class="cs-in">Bilbeis</span></span>
+              <span class="cs-f"><label>Coalition</label><span class="cs-in">Blue ▾</span></span></div>
+            <div class="cs-tg"><i class="on"></i>Greet pilots by name</div>
+            <div class="cs-tg"><i class="on"></i>Proactive calls — traffic, threats</div>
+          </div>
+          <div class="cs-mod">
+            <h4>— RADIO FEEL</h4>
+            <div class="cs-row2"><span class="cs-f"><label>End-of-call · s</label><span class="cs-in">0.5</span></span>
+              <span class="cs-f"><label>Grace · s</label><span class="cs-in">1.4</span></span></div>
+            <div class="cs-tg"><i class="on"></i>Squelch click when heard</div>
+            <div class="cs-tg"><i class="on"></i>Radio crackle on the voice</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="livebar rev in">
+  <div class="livebox">
+    <span class="lab"><i></i>LIVE · 252.000</span>
+    <span class="xline" id="typing"></span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="statement rev">
+    <p><b>It doesn't read scripts — it works the position.</b> Every reply is built
+      from the live mission: every aircraft, the weather, the threat picture.
+      Spoken in correct phraseology, in about two seconds.</p>
+    <div class="ruler"></div>
+    <div class="stats">
+      <div class="stat"><b>5</b><span>controllers on the net</span></div>
+      <div class="stat"><b>~2 s</b><span>to the first spoken word</span></div>
+      <div class="stat"><b>Any map</b><span>learns every airfield</span></div>
+      <div class="stat"><b>1 file</b><span>on the server, no core mods</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="crew">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">The crew</span>
+      <h2>Five controllers. One net.<br>Zero F-keys.</h2>
+      <p>Each position lives on its own SRS frequency and knows its own job —
+         hand-offs between them included.</p>
+    </div>
+    <div class="crew rev">
+      <div class="member" style="--pc:#e8b06e;--mk:6%"><div class="band"><i></i></div>
+        <span class="freq">251.000</span><h3>Ground</h3>
+        <p>Clearance, startup, taxi, hold short — it knows who's parked where.</p></div>
+      <div class="member" style="--pc:#7ce7b8;--mk:28%"><div class="band"><i></i></div>
+        <span class="freq">252.000</span><h3>Tower</h3>
+        <p>Takeoff, landing, the pattern, the overhead break. Wind with every clearance.</p></div>
+      <div class="member" style="--pc:#6ec8e8;--mk:50%"><div class="band"><i></i></div>
+        <span class="freq">253.000</span><h3>Approach</h3>
+        <p>Radar vectors, ILS and visual approaches, sequencing, GCA talk-downs.</p></div>
+      <div class="member" style="--pc:#b9a3f5;--mk:72%"><div class="band"><i></i></div>
+        <span class="freq">254.000</span><h3>Overlord</h3>
+        <p>AWACS — picture, bogey dope, intercepts, defensive calls when you're spiked.</p></div>
+      <div class="member" style="--pc:#f0997a;--mk:94%"><div class="band"><i></i></div>
+        <span class="freq">255.000</span><h3>Nail</h3>
+        <p>JTAC / FAC(A) — 9-lines, talk-ons, real laser designation, cleared hot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Why it feels real</span>
+      <h2>Built like a controller,<br>not a chatbot.</h2>
+    </div>
+    <div class="fx">
+      <div class="fx-list rev">
+        <div class="fxi"><span class="n">01</span>
+          <h3>It sees the whole airspace</h3>
+          <p>A one-file server hook streams the live picture — every aircraft, weather,
+             launches, kills. It never invents what isn't there.</p></div>
+        <div class="fxi"><span class="n">02</span>
+          <h3>It calls you first</h3>
+          <p>Traffic, go-arounds, runway incursions, missile launches — the crew
+             speaks up on its own, like people actually watching a scope.</p></div>
+        <div class="fxi"><span class="n">03</span>
+          <h3>Readbacks, verified in code</h3>
+          <p>Runway, heading, altitude, squawk — your readback is checked against the
+             clearance deterministically, not by vibes.</p></div>
+        <div class="fxi"><span class="n">04</span>
+          <h3>Say it your way</h3>
+          <p>Mumble, hesitate, use brevity or plain English — it understands pilots,
+             not voice commands.</p></div>
+        <div class="fxi"><span class="n">05</span>
+          <h3>A voice per position, in ~2 s</h3>
+          <p>Lifelike voices with radio crackle, streamed as they're generated.
+             Free offline voices included.</p></div>
+        <div class="fxi"><span class="n">06</span>
+          <h3>A debrief worth reading</h3>
+          <p>One click writes the after-action report from your real traffic —
+             the story, honest coaching, and a quote board of your dumbest calls.</p></div>
+      </div>
+      <div class="fx-demo rev">
+        <div style="text-align:right;margin-bottom:10px">
+          <a href="features.html" style="font:500 12.5px var(--mono);color:var(--acc)">the complete list — everything it does →</a>
+        </div>
+        <div class="term">
+          <div class="tbar"><i></i><i></i><i></i><span>252.000 — TOWER</span><em>LIVE</em></div>
+          <div class="tb">
+            <span class="who">PILOT</span><span class="y">uhh tower, data… holding short of, uh,
+              three-five right — we're ready</span><span class="fn">04</span><br>
+            <span class="who">TWR</span><span class="g">DATA, Bilbeis Tower — runway three five right,
+              cleared for takeoff, wind three two zero at eight.</span><br>
+            <span class="who">PILOT</span><span class="y">cleared for takeoff three-five
+              <u>left</u>, DATA</span><br>
+            <span class="who">TWR</span><span class="g">Negative — three five <b>right</b>.
+              Read back the correct runway.</span><span class="fn">03</span><br>
+            <span class="who">TWR</span><span class="g">DATA, traffic two o'clock, four miles,
+              opposite direction — a Hornet.</span><span class="fn">01·02</span><br>
+            <span class="who">AWACS</span><span class="p">DATA, missile in the air —
+              notch south, defend!</span><span class="fn">02</span><br>
+            <span class="who">TWR</span><span class="g">Readback correct. See you on the
+              flip side.</span><span class="fn">05</span><br>
+            <span class="who d">DEBRIEF</span><span class="d">"You read back the wrong runway
+              once today. The pen works, use it." </span><span class="fn">06</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Setup</span>
+      <h2>Flying with it in ten minutes.</h2>
+    </div>
+    <div class="trio">
+      <div class="rev"><span class="num">01</span>
+        <h3>Run setup</h3>
+        <p>Installs everything, configures SRS, and asks for your invite code —
+           checked on the spot. One time.</p>
+        <span class="cmd"><b>&gt;</b> SETUP.bat</span></div>
+      <div class="rev"><span class="num">02</span>
+        <h3>Start the crew</h3>
+        <p>One click brings up all five controllers on their frequencies and opens
+           the Control Station.</p>
+        <span class="cmd"><b>&gt;</b> START_ALL.bat</span></div>
+      <div class="rev"><span class="num">03</span>
+        <h3>Key up and talk</h3>
+        <p>Tune 251–255 in SRS and make your call. Your whole flight can talk to it —
+           they install nothing.</p>
+        <span class="cmd"><b>🎙</b> "Tower, DATA, ready for departure"</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="beta">
+  <div class="wrap">
+    <div class="beta-card rev">
+      <div class="aurora"><i></i><i></i><i></i><i></i><i></i></div>
+      <div>
+        <span class="kicker">Open beta</span>
+        <h2>Free while we tune it.</h2>
+        <p>WILCO is in active development with a small group of pilots. One invite
+           code and you're on frequency — no accounts, no API keys, nothing to buy.</p>
+        <ul>
+          <li>All five controllers, every feature, no locks</li>
+          <li>Single-player and multiplayer over SRS</li>
+          <li>Nothing to configure but your invite code</li>
+          <li>Premium voice tiers planned — beta pilots keep their price</li>
+        </ul>
+      </div>
+      <div class="price-box">
+        <div class="p">$0</div>
+        <div class="per">free beta · invite code · fair daily allowance</div>
+        <a class="btn solid big" href="https://github.com/khossam963-png/wilco/releases/latest" id="dl-btn" style="width:100%;justify-content:center">Download the beta</a>
+        <a class="btn big" href="access.html" style="width:100%;justify-content:center;margin-top:8px">Get your invite code</a>
+        <div class="sys">Windows 10/11 · DCS World · SRS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center rev">
+      <span class="kicker" style="text-align:center">FAQ</span>
+      <h2>Fair questions.</h2>
+    </div>
+    <div class="faq rev">
+      <details><summary>Does it work in multiplayer?</summary>
+        <p>Yes — that's the point. The crew sits on the SRS frequencies like human
+        controllers; everyone on the server can talk to it. Only the host runs WILCO,
+        friends just tune the radio.</p></details>
+      <details><summary>Is it cheating?</summary>
+        <p>No. It's a controller, not a sensor: it tells you what a real controller
+        with a real scope would say. It never gives you information a human GCI
+        couldn't.</p></details>
+      <details><summary>What does it cost to run?</summary>
+        <p>Nothing during the beta — your invite code covers the AI. There's a fair
+        daily allowance (enough for a long evening of flying) and it resets every
+        day. Voices are included.</p></details>
+      <details><summary>Will it break server integrity checks?</summary>
+        <p>No core files are touched. The data feed is a single hook file in Saved
+        Games — the same mechanism SRS and LotATC use.</p></details>
+      <details><summary>What do I need?</summary>
+        <p>Windows 10/11, DCS World, SRS, and a mid-range PC. A GPU makes speech
+        recognition faster, but CPU works. Setup is one script.</p></details>
+      <details><summary>Can it handle my accent / sloppy radio?</summary>
+        <p>It's built for real pilots, not voice-command grammar. It handles hesitation,
+        slang, accents and half-finished calls — and asks you to "say again" like a
+        human would when you genuinely mumble.</p></details>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="final-frame rev">
+    <div class="aurora"><i></i><i></i><i></i><i></i><i></i></div>
+    <h2>Your next flight deserves<br>a real voice on the other end.</h2>
+    <p>Put a crew on the net tonight.</p>
+    <a class="btn solid big" href="#beta">Get WILCO — free beta</a>
+    <div class="dial" aria-hidden="true">
+      <div class="ticks"><i class="marker"></i></div>
+      <div class="freqs">
+        <span><b>251.0</b>GND</span><span class="tuned"><b>252.0</b>TWR</span>
+        <span><b>253.0</b>APP</span><span><b>254.0</b>AWACS</span><span><b>255.0</b>FAC</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#">
+      <svg width="16" height="16" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
+      WILCO
+    </a>
+    <div class="fine">WILCO is an independent project, not affiliated with or endorsed by
+      Eagle Dynamics, DCS World, or the DCS-SimpleRadio-Standalone project. Voice AI usage
+      is billed to your own API accounts.</div>
+    <div class="right">© 2026 WILCO</div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 12));
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+}), {threshold: .12});
+document.querySelectorAll(".rev:not(.in)").forEach(el => io.observe(el));
+
+/* ---- the living demo: one script drives the mini-station AND the live bar ---- */
+const FEED = [
+  ["14:02:11","GND","pilot","Bilbeis ground, DATA, parking one niner, request taxi"],
+  ["14:02:14","GND","ctrl","DATA, Bilbeis Ground — taxi to runway three five right, hold short. Wind three two zero at eight."],
+  ["14:02:31","GND","pilot","taxi three five right, hold short, DATA"],
+  ["14:04:02","TWR","pilot","tower, DATA, holding short three five right, ready for departure"],
+  ["14:04:05","TWR","ctrl","DATA, runway three five right, cleared for takeoff. Contact Overlord two five four airborne."],
+  ["14:06:40","AWACS","pilot","Overlord, DATA, passing angels five, request picture"],
+  ["14:06:44","AWACS","ctrl","DATA, radar contact. Single group bullseye two seven zero for forty, hot, hostile — two Fulcrums."],
+  ["14:07:15","AWACS","pilot","DATA committing, fox three on the lead"],
+  ["14:07:52","AWACS","ctrl","Splash lead Fulcrum. Trail group dragging cold — picture clean in ten."],
+  ["14:09:03","FAC","pilot","Nail, Hawg one one, two ship, four GBU-twelve, playtime two zero"],
+  ["14:09:08","FAC","ctrl","Hawg one one, Nail — Type two in effect. Advise ready for the niner-line."]
+];
+const CSC = {GND:"--ground", TWR:"--tower", APP:"--approach", AWACS:"--awacs", FAC:"--fac"};
+const csLog = document.getElementById("cs-log");
+const liveBox = document.getElementById("typing");
+const liveLab = document.querySelector(".livebox .lab");
+const FREQ = {GND:"251.000", TWR:"252.000", APP:"253.000", AWACS:"254.000", FAC:"255.000"};
+
+function csRow(t, pos, role){
+  const div = document.createElement("div");
+  div.className = "cs-r " + (role === "pilot" ? "pilot" : "ctrl");
+  div.style.setProperty("--c", `var(${CSC[pos] || "--tower"})`);
+  div.innerHTML = `<span class="t">${t}</span><span class="w">${role === "pilot" ? "PILOT" : pos}</span>` +
+                  `<span class="x"></span>`;
+  csLog.appendChild(div);
+  while (csLog.children.length > 12) csLog.removeChild(csLog.firstChild);
+  return div.querySelector(".x");
+}
+/* the dial tunes to whichever station is on the air — same % axis as the ticks */
+const marker = document.getElementById("dial-marker");
+const freqSpans = [...document.querySelectorAll("#dial-freqs span")];
+const DIAL_X = {GND: "0%", TWR: "25%", APP: "50%", AWACS: "75%", FAC: "100%"};
+function tuneDial(pos, transmitting){
+  if (!marker || !DIAL_X[pos]) return;
+  marker.style.left = DIAL_X[pos];
+  marker.classList.toggle("tx", !!transmitting);
+  freqSpans.forEach(s => s.classList.toggle("tuned", s.dataset.pos === pos));
+}
+
+/* one transmission: the LIVE bar and the station log write the SAME line together */
+async function playLine(t, pos, role, text){
+  liveLab.childNodes[1].textContent = `LIVE · ${FREQ[pos] || "252.000"}`;
+  tuneDial(pos, true);                        // dial swings to the active station
+  const prefix = role === "pilot" ? "YOU · " : pos + " · ";
+  const rowSpan = csRow(t, pos, role);        // the row appears as the mic keys up...
+  liveBox.innerHTML = "<span></span><span class='caret'></span>";
+  const liveSpan = liveBox.firstChild;
+  liveSpan.textContent = prefix;
+  for (let i = 0; i < text.length; i++){      // ...and both write in lockstep
+    const part = text.slice(0, i + 1);
+    liveSpan.textContent = prefix + part;
+    rowSpan.textContent = part;
+    await new Promise(r => setTimeout(r, text[i] === " " ? 8 : 14));
+  }
+  marker.classList.remove("tx");              // release the mic
+}
+async function demoLoop(){
+  while (true){
+    csLog.innerHTML = "";
+    for (const [t, pos, role, text] of FEED){
+      await playLine(t, pos, role, text);
+      await new Promise(r => setTimeout(r, role === "pilot" ? 450 : 1000));
+    }
+    await new Promise(r => setTimeout(r, 3200));
+  }
+}
+/* station clock */
+setInterval(() => { const el = document.getElementById("cs-clock");
+  if (el) el.textContent = new Date().toLocaleTimeString("en-GB") + " LCL"; }, 1000);
+demoLoop();
+
+</script>
+</body>
+</html>

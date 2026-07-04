@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get your WILCO invite code</title>
+<meta name="description" content="Sign up for the WILCO beta — one email, one invite code, you're on frequency.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23f4f4f5' stroke-width='2.4'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#050506;--card:#101013;--line:rgba(255,255,255,.065);--line2:rgba(255,255,255,.12);
+    --txt:#f4f4f5;--body:#9d9da6;--dim:#5e5e68;--acc:#34d399;--red:#f87171;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;display:flex;flex-direction:column;color:var(--body);
+    font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(900px 600px at 80% -10%,rgba(52,211,153,.09),transparent 60%),
+      radial-gradient(700px 500px at 10% 100%,rgba(62,195,216,.06),transparent 60%),
+      var(--bg)}
+  body::before{content:"";position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay}
+  a{color:inherit;text-decoration:none}
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,6,.72);
+      backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:32px;height:60px;max-width:1200px;
+      margin:0 auto;padding:0 28px}
+  .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);
+      color:var(--txt);letter-spacing:.14em}
+  .nav-in a.back{margin-left:auto;font-size:13.5px;color:var(--body)}
+  .nav-in a.back:hover{color:var(--txt)}
+
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:110px 24px 60px}
+  .card{width:100%;max-width:460px;background:linear-gradient(180deg,#131317,var(--card));
+      border:1px solid var(--line2);border-radius:20px;padding:44px 46px 38px;text-align:center;
+      box-shadow:0 40px 110px rgba(0,0,0,.6)}
+  .kicker{font:500 11px var(--mono);color:var(--dim);letter-spacing:.24em;
+      text-transform:uppercase;display:block;margin-bottom:14px}
+  .kicker::before{content:"— ";color:var(--acc)}
+  h1{color:var(--txt);font-size:27px;font-weight:700;letter-spacing:-.03em;margin-bottom:10px}
+  .sub{font-size:14px;margin-bottom:26px}
+  .sub b{color:var(--txt);font-weight:600}
+  form{display:flex;gap:8px}
+  input{flex:1;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:11px;
+      color:var(--txt);padding:12px 15px;font:500 14px var(--sans);outline:none}
+  input:focus{border-color:rgba(52,211,153,.55)}
+  button{font:600 14px var(--sans);color:#0b0b0d;background:#fff;border:none;cursor:pointer;
+      border-radius:11px;padding:12px 20px;transition:.15s}
+  button:hover{background:#e6e6eb}
+  button:disabled{opacity:.5;cursor:wait}
+  #msg{min-height:20px;margin-top:14px;font-size:13px;color:var(--dim)}
+  #msg.bad{color:var(--red)}
+  #result{display:none;margin-top:22px;border-top:1px solid var(--line);padding-top:22px}
+  #result.show{display:block}
+  #result .lbl{font:500 10.5px var(--mono);letter-spacing:.2em;color:var(--dim);margin-bottom:10px}
+  .codebox{display:flex;gap:8px;align-items:center;justify-content:center}
+  #code{font:600 21px var(--mono);letter-spacing:.1em;color:var(--acc);
+      background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.35);
+      border-radius:11px;padding:12px 18px;user-select:all}
+  #copy{padding:12px 15px;background:transparent;border:1px solid var(--line2);color:var(--body)}
+  #copy:hover{border-color:rgba(255,255,255,.35);background:transparent;color:var(--txt)}
+  #result .next{margin-top:16px;font-size:13px;color:var(--body);line-height:1.7}
+  #result .next b{color:var(--txt);font-weight:600}
+  .fine{margin-top:26px;font-size:12px;color:var(--dim);line-height:1.7}
+  footer{padding:22px;text-align:center;font-size:12px;color:var(--dim)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="logo" href="index.html">
+    <svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
+    WILCO
+  </a>
+  <a class="back" href="index.html">← Back to the overview</a>
+</div></nav>
+
+<main>
+  <div class="card">
+    <span class="kicker">Beta access</span>
+    <h1>Get your invite code.</h1>
+    <p class="sub">One email, one code — <b>free</b>, no password, no account.
+       Already signed up? Enter the same email to see your code again.</p>
+    <form id="f">
+      <input id="email" type="email" placeholder="you@example.com" required autocomplete="email">
+      <button id="go" type="submit">Get my code</button>
+    </form>
+    <div id="msg"></div>
+    <div id="result">
+      <div class="lbl">YOUR INVITE CODE</div>
+      <div class="codebox"><span id="code"></span><button id="copy" type="button">Copy</button></div>
+      <div class="next"><b>Next:</b> download WILCO, run SETUP, and paste this code
+        when the Control Station asks. That's the whole setup.</div>
+    </div>
+    <div class="fine">Your email is used only to remember which code is yours —
+      no newsletters, no sharing. Fair daily allowance per code; it resets every day.</div>
+  </div>
+</main>
+
+<footer>WILCO is an independent project, not affiliated with Eagle Dynamics or DCS World.</footer>
+
+<script>
+const SERVICE = "https://wilco-relay.wilco-atc.workers.dev";
+const $ = id => document.getElementById(id);
+$("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("msg"); msg.className = ""; msg.textContent = "checking…";
+  $("go").disabled = true;
+  try{
+    const r = await (await fetch(SERVICE + "/signup", {method: "POST",
+      headers: {"content-type": "application/json"},
+      body: JSON.stringify({email: $("email").value})})).json();
+    if (r.ok){
+      msg.textContent = r.existing ? "Welcome back — here's your code." : "You're in.";
+      $("code").textContent = r.code;
+      $("result").classList.add("show");
+    } else {
+      msg.className = "bad"; msg.textContent = r.msg || "Something went wrong — try again.";
+    }
+  }catch(err){
+    msg.className = "bad"; msg.textContent = "Could not reach the WILCO service — check your connection.";
+  }finally{ $("go").disabled = false; }
+});
+$("copy").onclick = async () => {
+  try{ await navigator.clipboard.writeText($("code").textContent);
+       $("copy").textContent = "Copied"; setTimeout(() => $("copy").textContent = "Copy", 1600);
+  }catch(e){}
+};
+</script>
+</body>
+</html>

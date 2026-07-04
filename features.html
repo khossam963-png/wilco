@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Everything WILCO does — feature list</title>
+<meta name="description" content="The complete WILCO capability list, told the way you'll meet it: from cold start to the debrief.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23f4f4f5' stroke-width='2.4'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050506;--frame:#0a0a0c;--card:#101013;--line:rgba(255,255,255,.065);
+    --line2:rgba(255,255,255,.12);--txt:#f4f4f5;--body:#9d9da6;--dim:#5e5e68;
+    --acc:#34d399;
+    --ground:#e8b06e;--tower:#7ce7b8;--approach:#6ec8e8;--awacs:#b9a3f5;--fac:#f0997a;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",Consolas,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{color:var(--body);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1100px 700px at 88% 0%,rgba(62,195,216,.07),transparent 62%),
+      radial-gradient(950px 750px at 0% 42%,rgba(52,211,153,.06),transparent 58%),
+      var(--bg);
+    background-attachment:fixed,fixed,scroll}
+  body::before{content:"";position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay}
+  h1,h2,h3{color:var(--txt);letter-spacing:-.025em;font-weight:600}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,6,.72);
+      backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:32px;height:60px;max-width:1200px;
+      margin:0 auto;padding:0 28px}
+  .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);
+      color:var(--txt);letter-spacing:.14em}
+  .nav-in a.back{margin-left:auto;font-size:13.5px;color:var(--body)}
+  .nav-in a.back:hover{color:var(--txt)}
+
+  header.page{padding:130px 0 30px;}
+  .kicker{font:500 11.5px var(--mono);color:var(--dim);letter-spacing:.24em;
+      text-transform:uppercase;display:block;margin-bottom:16px}
+  .kicker::before{content:"— ";color:var(--acc)}
+  header.page h1{font-size:clamp(32px,5vw,52px);line-height:1.05;font-weight:700;
+      letter-spacing:-.035em;margin-bottom:16px}
+  header.page p{font-size:17px;max-width:600px}
+  header.page p b{color:var(--txt);font-weight:600}
+
+  /* the sortie timeline */
+  .phase{margin-top:64px;position:relative;padding-left:36px}
+  .phase::before{content:"";position:absolute;left:8px;top:44px;bottom:-52px;width:1px;
+      background:repeating-linear-gradient(180deg,rgba(255,255,255,.14) 0 6px,transparent 6px 12px)}
+  .phase:last-of-type::before{display:none}
+  .phase > h2{display:flex;align-items:center;gap:14px;font-size:22px;margin-bottom:6px;
+      margin-left:-36px}
+  .phase > h2 i{width:17px;height:17px;border-radius:50%;flex:0 0 auto;font-style:normal;
+      background:var(--bg);border:2px solid var(--pc,var(--acc));
+      box-shadow:0 0 10px color-mix(in srgb,var(--pc,var(--acc)) 50%,transparent)}
+  .phase > h2 em{font:500 12px var(--mono);color:var(--pc,var(--acc));font-style:normal;
+      letter-spacing:.1em}
+  .phase > .who{font-size:13px;color:var(--dim);margin-bottom:20px}
+  .feat{display:grid;gap:3px}
+  .f{display:flex;gap:14px;align-items:baseline;padding:9px 0;
+      border-top:1px solid var(--line)}
+  .f:first-child{border-top:none}
+  .f b{flex:0 0 240px;color:var(--txt);font-weight:600;font-size:14.5px}
+  .f span{font-size:14px;color:var(--body)}
+  .f span code{font:12px var(--mono);color:color-mix(in srgb,var(--pc,var(--acc)) 75%,#fff 10%);
+      background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
+
+  .under{margin-top:90px;border-top:1px solid var(--line);padding-top:50px}
+  .under h2{font-size:26px;margin-bottom:8px}
+  .under > p{margin-bottom:26px;max-width:620px}
+  .ugrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucell{background:linear-gradient(180deg,#131317,var(--card));border:1px solid var(--line);
+      border-radius:14px;padding:22px 24px}
+  .ucell h3{font-size:15.5px;margin-bottom:6px}
+  .ucell p{font-size:13.5px;color:var(--dim)}
+
+  .cta{text-align:center;padding:100px 0 90px}
+  .cta h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:24px;letter-spacing:-.03em}
+  .btn{display:inline-flex;align-items:center;gap:8px;font:600 14.5px var(--sans);
+      padding:12px 26px;border-radius:99px;background:#fff;color:#0b0b0d;transition:.16s}
+  .btn:hover{background:#e9e9ee;transform:translateY(-1px)}
+  footer{border-top:1px solid var(--line);padding:30px 0 40px;font-size:12.5px;color:var(--dim)}
+  @media (max-width:760px){
+    .f{flex-direction:column;gap:3px}
+    .f b{flex:none}
+    .ugrid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-in">
+  <a class="logo" href="index.html">
+    <svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
+    WILCO
+  </a>
+  <a class="back" href="index.html">← Back to the overview</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="page">
+    <span class="kicker">The full list</span>
+    <h1>Everything WILCO does,<br>in the order you'll meet it.</h1>
+    <p>A feature list reads better as a <b>sortie</b>. Cold jet to debrief —
+       here's who talks to you, and what they can actually do.</p>
+  </header>
+
+  <section class="phase" style="--pc:var(--ground)">
+    <h2><i></i>On the ramp <em>GROUND · 251.0</em></h2>
+    <div class="who">Cold start to the hold-short line.</div>
+    <div class="feat">
+      <div class="f"><b>Startup & pushback</b><span><code>start approved</code> — asked for only when you want it.</span></div>
+      <div class="f"><b>IFR / CRAFT clearance</b><span>Full clearance with route, altitude, departure freq and squawk — only if you ask for one.</span></div>
+      <div class="f"><b>Taxi with hold-short</b><span>To the active runway, wind and altimeter included. Knows this field has numbered spots, not lettered taxiways — never invents geography.</span></div>
+      <div class="f"><b>Real squawk codes</b><span>Each flight gets ONE stable transponder code, remembered across every controller.</span></div>
+      <div class="f"><b>Taxi conflict calls</b><span>Two jets converging on the ground? He tells one to give way — on his own.</span></div>
+      <div class="f"><b>Knows who's parked where</b><span>Live ground picture: parked, taxiing, on the runway.</span></div>
+    </div>
+  </section>
+
+  <section class="phase" style="--pc:var(--tower)">
+    <h2><i></i>The runway <em>TOWER · 252.0</em></h2>
+    <div class="who">Takeoff, the pattern, landing — the busiest freq on the field.</div>
+    <div class="feat">
+      <div class="f"><b>Takeoff clearances</b><span><code>line up and wait</code>, formation and intersection departures, wind with every clearance.</span></div>
+      <div class="f"><b>Readbacks verified in code</b><span>Read back the wrong runway, heading, altitude or squawk and it's caught deterministically — not by AI mood.</span></div>
+      <div class="f"><b>The whole pattern</b><span>Touch-and-go, the option, closed traffic, extend downwind, number-two-follow-traffic.</span></div>
+      <div class="f"><b>The military overhead</b><span><code>report initial</code> → <code>the break</code> → numbers. Like it should be.</span></div>
+      <div class="f"><b>Go-arounds — proactively</b><span>Runway occupied while you're on short final? He calls the go-around before you ask.</span></div>
+      <div class="f"><b>Runway incursion guard</b><span>Someone taxiing toward an active runway with traffic rolling gets a HOLD SHORT, immediately, unprompted.</span></div>
+      <div class="f"><b>Emergencies</b><span>Mayday/pan-pan, 7700/7600/7500, souls-and-fuel asked once and remembered, equipment rolled, priority handling.</span></div>
+      <div class="f"><b>Light guns for NORDO</b><span>Radio failure? Light-gun signals, stated correctly.</span></div>
+      <div class="f"><b>Wake turbulence</b><span>Cautions only when a real heavy is actually ahead — never invented.</span></div>
+    </div>
+  </section>
+
+  <section class="phase" style="--pc:var(--approach)">
+    <h2><i></i>Coming home <em>APPROACH · 253.0</em></h2>
+    <div class="who">Radar control from 40 miles out to the final approach fix.</div>
+    <div class="feat">
+      <div class="f"><b>Radar contact & vectors</b><span>Heading, altitude and speed control off your real position — never asks where you are when he can see you.</span></div>
+      <div class="f"><b>ILS / TACAN / visual</b><span>Vector to intercept, <code>cleared ILS three five right, report established</code>, or the fast visual when weather allows.</span></div>
+      <div class="f"><b>GCA talk-downs</b><span>Ask for a precision talk-down and he flies you down the glidepath by voice.</span></div>
+      <div class="f"><b>Sequencing</b><span>Real separation (3 nm / 1000 ft) against real traffic — and never against ghosts: if the pattern is empty, you're number one.</span></div>
+      <div class="f"><b>Auto runway selection</b><span>The active runway follows the live mission wind, at any airfield on any map.</span></div>
+    </div>
+  </section>
+
+  <section class="phase" style="--pc:var(--awacs)">
+    <h2><i></i>The fight <em>OVERLORD · 254.0</em></h2>
+    <div class="who">AWACS. The air war, in real ACC/NATO brevity.</div>
+    <div class="feat">
+      <div class="f"><b>The picture</b><span>Groups sorted by threat: bullseye, altitude, aspect, declaration — <code>two groups, azimuth twenty</code>.</span></div>
+      <div class="f"><b>Bogey dope with real math</b><span>BRAA computed from actual positions, not guessed. If the picture's clean, he says clean.</span></div>
+      <div class="f"><b>Declare / snap / alpha check</b><span>The full request set, answered from live data.</span></div>
+      <div class="f"><b>Intercept control</b><span>Commit calls, cut-off geometry, sorting a two-ship onto a group.</span></div>
+      <div class="f"><b>Defensive calls when spiked</b><span><code>spiked 330!</code> → he correlates the shooter and gives you the notch/crank/pump.</span></div>
+      <div class="f"><b>Missile launch warnings</b><span>Sees actual launch events from the sim — <code>missile in the air, defend!</code> before your RWR sometimes.</span></div>
+      <div class="f"><b>SAM belt awareness</b><span>Surface threats by NATO reporting name (SA-2, SA-6, SA-10), positions from live data.</span></div>
+      <div class="f"><b>New group / faded / merged</b><span>Proactive picture changes at BVR range — he calls you first.</span></div>
+      <div class="f"><b>Periodic picture broadcasts</b><span>Like a real E-3: the picture on interval during a fight, not only on request.</span></div>
+      <div class="f"><b>Fuel & recovery</b><span>Joker/bingo tracking, pigeons home with exact bearing and range, fence in/out, ROE consistency.</span></div>
+      <div class="f"><b>Splash discipline</b><span>Your fox is acknowledged as a shot; <code>splash</code> comes only when the kill is real (from sim events).</span></div>
+    </div>
+  </section>
+
+  <section class="phase" style="--pc:var(--fac)">
+    <h2><i></i>Mud moving <em>NAIL · 255.0</em></h2>
+    <div class="who">JTAC / FAC(A) to JP 3-09.3 standards — with attitude.</div>
+    <div class="feat">
+      <div class="f"><b>Full CAS check-in</b><span>Ordnance, playtime, capabilities — then a situation update and game plan.</span></div>
+      <div class="f"><b>The 9-line</b><span>Proper order, real grids from live target data, readbacks of lines 4-6-8 REQUIRED before you're allowed near the target.</span></div>
+      <div class="f"><b>Casual mode</b><span>Don't want the formal brief? <code>just point me at the bad guys</code> works — target, friendlies, cleared in.</span></div>
+      <div class="f"><b>A real laser</b><span>Not roleplay: <code>lase the lead tank</code> fires an actual designator in the sim your GBU can ride. <code>cease lase</code> stops it.</span></div>
+      <div class="f"><b>Voice-steered target area</b><span>Move his eyes by bullseye, your position, or an F10 map mark — <code>target area is my mark</code>.</span></div>
+      <div class="f"><b>Type 1/2/3 control</b><span>Cleared hot / continue dry / abort discipline, danger-close with initials, BDA after every pass.</span></div>
+      <div class="f"><b>Troops in contact</b><span>TIC = expedite: minimum questions, bombs on target now.</span></div>
+      <div class="f"><b>Personality included</b><span>Blow a readback and hear about it: <i>"that's the elevation of your IQ, not the target."</i></span></div>
+    </div>
+  </section>
+
+  <section class="phase" style="--pc:#8b98a9">
+    <h2><i></i>After the flight <em>DEBRIEF</em></h2>
+    <div class="who">One click in the Control Station.</div>
+    <div class="feat">
+      <div class="f"><b>The after-action report</b><span>Written from your REAL radio traffic: the story of the sortie, by-the-numbers stats, per-pilot coaching, and a quote board of your best and dumbest calls.</span></div>
+      <div class="f"><b>Full transcripts, forever</b><span>Every session archived day-by-day — reread any flight.</span></div>
+    </div>
+  </section>
+
+  <div class="under">
+    <h2>Under the hood</h2>
+    <p>The parts you don't see — they're why it feels like a person and not a chatbot.</p>
+    <div class="ugrid">
+      <div class="ucell"><h3>It hears like a wingman</h3><p>Whisper STT is fed the live callsigns and station names each call, garbled station names get repaired ("over lowered" → Overlord), and mangled radio gets a human "say again" — never a guess.</p></div>
+      <div class="ucell"><h3>~1.5–2.5s replies</h3><p>Transcription starts while you're still pausing, the AI's memory is kept permanently warm, and the voice starts speaking on the first clause — with a squelch click the moment you're heard.</p></div>
+      <div class="ucell"><h3>Never invents</h3><p>Every position, frequency and threat comes from live data. Empty picture = "clean". Dead feed = "negative radar contact". No ghost traffic, ever.</p></div>
+      <div class="ucell"><h3>Survives everything</h3><p>API hiccup → retries, then a calm "stand by". Voice service down → offline voice for that call. SRS restart → auto-reconnects. A controller never dies mid-mission.</p></div>
+      <div class="ucell"><h3>One crew, one story</h3><p>Controllers share a flight strip: Tower already knows what Ground told you. Handoffs come with the right name and the right frequency — from the comm plan, never invented.</p></div>
+      <div class="ucell"><h3>Knows who's talking</h3><p>Fuzzy callsign matching, self-renamed pilots tracked, two humans told apart by their stated altitude/heading, and pilot-to-pilot chatter ignored on busy freqs.</p></div>
+      <div class="ucell"><h3>Any map, any side</h3><p>Auto-learns every airfield on the loaded map with a generated comm plan. Flies blue or red. Active runway follows the wind.</p></div>
+      <div class="ucell"><h3>One code, zero setup pain</h3><p>Your invite code is the only credential — no accounts, no API keys, nothing to buy. Personality dial: pro, veteran, or full Ace Combat.</p></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Easier to hear than to read.</h2>
+    <a class="btn" href="index.html#beta">Get the beta — free</a>
+  </div>
+</div>
+
+<footer><div class="wrap">WILCO is an independent project, not affiliated with Eagle Dynamics, DCS World, or the DCS-SimpleRadio-Standalone project.</div></footer>
+</body>
+</html>
