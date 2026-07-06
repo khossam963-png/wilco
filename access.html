@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WILCO — Pilot profile</title>
 <meta name="description" content="Create your WILCO account — your invite code, allowance, downloads and referrals in one place.">
+<link rel="canonical" href="https://khossam963-png.github.io/wilco/access.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khossam963-png.github.io/wilco/access.html">
+<meta property="og:title" content="WILCO — Pilot profile">
+<meta property="og:description" content="Create your WILCO account — your invite code, allowance, downloads and referrals in one place.">
+<meta property="og:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WILCO — Pilot profile">
+<meta name="twitter:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23f4f4f5' stroke-width='2.4'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,8 +284,19 @@
   </div>
 </main>
 
-<footer>WILCO is an independent project, not affiliated with Eagle Dynamics or DCS World.</footer>
+<footer style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center">
+  <a href="index.html" style="color:inherit;text-decoration:none">Home</a>
+  <a href="changelog.html" style="color:inherit;text-decoration:none">Changelog</a>
+  <a href="privacy.html" style="color:inherit;text-decoration:none">Privacy</a>
+  <a href="terms.html" style="color:inherit;text-decoration:none">Terms</a>
+  <a href="https://github.com/khossam963-png/wilco/issues" style="color:inherit;text-decoration:none">Support</a>
+  <span style="opacity:.7">· WILCO is an independent project, not affiliated with Eagle Dynamics or DCS World.</span>
+</footer>
 
+<script>
+try{if(!sessionStorage.getItem("wilco_hit")){sessionStorage.setItem("wilco_hit","1");
+fetch("https://wilco-relay.wilco-atc.workers.dev/hit",{method:"POST"}).catch(()=>{})}}catch(e){}
+</script>
 <script>
 const SERVICE = "https://wilco-relay.wilco-atc.workers.dev";
 const $ = id => document.getElementById(id);

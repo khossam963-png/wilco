@@ -14,6 +14,8 @@
 <meta name="twitter:title" content="WILCO — Your AI radio crew for DCS World">
 <meta name="twitter:description" content="Talk to your tower like a real human. A complete AI radio crew for DCS over SRS.">
 <meta name="twitter:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<link rel="canonical" href="https://khossam963-png.github.io/wilco/">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23e8fff3' stroke-width='2.5'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -387,14 +389,35 @@
       margin-bottom:16px;font-weight:700}
   .final p{margin-bottom:34px;font-size:17px;color:#c9c9d2}
   .final .dial{margin-top:50px}
-  footer{border-top:1px solid var(--line);padding:34px 0 42px}
-  footer .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:44px 0 42px}
+  .foot-cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:28px;margin-bottom:34px}
+  .foot-cols h4{font:500 10.5px var(--mono);letter-spacing:.18em;color:var(--dim);margin-bottom:12px}
+  .foot-cols a{display:block;font-size:13.5px;color:var(--body);margin-bottom:8px}
+  .foot-cols a:hover{color:var(--txt)}
+  .foot-brand p{font-size:12.5px;color:var(--dim);line-height:1.6;max-width:260px;margin-top:10px}
+  .foot-base{display:flex;gap:24px;align-items:center;flex-wrap:wrap;
+      border-top:1px solid var(--line);padding-top:22px}
   footer .fine{font-size:12px;color:var(--dim);max-width:600px;line-height:1.6}
   footer .logo{font-size:14px}
   footer .right{margin-left:auto;font:12px var(--mono);color:var(--dim)}
 
+  /* ============ hear the crew ============ */
+  .listen{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .lcard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+      padding:20px 22px 16px;position:relative;overflow:hidden}
+  .lcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+      background:var(--pc,var(--acc));opacity:.75}
+  .lcard .who{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .lcard .who b{color:var(--txt);font-size:15px;letter-spacing:-.01em}
+  .lcard .who span{font:500 11px var(--mono);color:var(--dim);letter-spacing:.12em}
+  .lcard q{display:block;font-size:13.5px;color:var(--body);font-style:italic;
+      margin-bottom:14px;quotes:"\201C" "\201D"}
+  .lcard audio{width:100%;height:34px;color-scheme:dark}
+  .lcard.wide{grid-column:1/-1}
+
   @media (max-width:900px){
     .nav-links{display:none}
+    .listen{grid-template-columns:1fr}
     .crew{grid-template-columns:1fr;gap:0}
     .member{border-left:none;border-top:1px solid var(--line);padding:18px 0}
     .feat{grid-template-columns:1fr}
@@ -402,6 +425,9 @@
     .trio{grid-template-columns:1fr}
     .beta-card{grid-template-columns:1fr;padding:34px}
     .stats{gap:32px}
+    .foot-cols{grid-template-columns:1fr 1fr}
+    .hero{padding:84px 18px 64px}
+    .hero .ctas{flex-wrap:wrap}
   }
 </style>
 </head>
@@ -415,10 +441,12 @@
     </a>
     <div class="nav-links">
       <a href="#crew">The crew</a>
+      <a href="#listen">Hear it</a>
       <a href="#features">Features</a>
       <a href="features.html">Everything it does</a>
       <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
+      <a href="changelog.html">Changelog</a>
     </div>
     <div class="nav-cta">
       <a href="access.html" style="font-size:13.5px;margin-right:18px">Sign in</a>
@@ -546,6 +574,44 @@
       <div class="member" style="--pc:#f0997a;--mk:94%"><div class="band"><i></i></div>
         <span class="freq">255.000</span><h3>Nail</h3>
         <p>JTAC / FAC(A) — 9-lines, talk-ons, real laser designation, cleared hot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="listen">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Hear the crew</span>
+      <h2>Don't take our word for it.<br>Key up and listen.</h2>
+      <p>Five real transmissions, straight from the radio pipeline — same voices,
+         same radio crackle your flight gets.</p>
+    </div>
+    <div class="listen rev">
+      <div class="lcard" style="--pc:#e8b06e">
+        <div class="who"><b>Ground</b><span>251.000 · THE DEADPAN LIFER</span></div>
+        <q>Taxi to runway three five right, hold short. Try to keep all the wheels on the pavement this time.</q>
+        <audio controls preload="none" src="assets/audio/ground.wav"></audio>
+      </div>
+      <div class="lcard" style="--pc:#7ce7b8">
+        <div class="who"><b>Tower</b><span>252.000 · THE QUICK-DRAW</span></div>
+        <q>Runway three five right, cleared for takeoff. Don't scratch the paint.</q>
+        <audio controls preload="none" src="assets/audio/tower.wav"></audio>
+      </div>
+      <div class="lcard" style="--pc:#6ec8e8">
+        <div class="who"><b>Approach</b><span>253.000 · THE MIDNIGHT VOICE</span></div>
+        <q>Radar contact. Relax — heading two one zero, I'll bring you home.</q>
+        <audio controls preload="none" src="assets/audio/approach.wav"></audio>
+      </div>
+      <div class="lcard" style="--pc:#b9a3f5">
+        <div class="who"><b>Overlord</b><span>254.000 · THE ICE SURGEON</span></div>
+        <q>Picture: two-ship Fulcrum, bullseye two three four for forty, hot. Your move.</q>
+        <audio controls preload="none" src="assets/audio/awacs.wav"></audio>
+      </div>
+      <div class="lcard wide" style="--pc:#f0997a">
+        <div class="who"><b>Nail</b><span>255.000 · THE GUNSLINGER — TO A PILOT WHO HAD IT COMING</span></div>
+        <q>You're Winchester and running your mouth instead of flying your jet. Go land the airplane. Nail's out.</q>
+        <audio controls preload="none" src="assets/audio/fac.wav"></audio>
+      </div>
     </div>
   </div>
 </section>
@@ -695,6 +761,11 @@
         <p>It's built for real pilots, not voice-command grammar. It handles hesitation,
         slang, accents and half-finished calls — and asks you to "say again" like a
         human would when you genuinely mumble.</p></details>
+      <details><summary>What happens to my voice and my data?</summary>
+        <p>Your voice is never recorded or stored — it's turned into text in real time,
+        on your own PC by default. We keep almost nothing: hashed password, invite code,
+        daily counters. The whole story fits on one page —
+        <a href="privacy.html" style="color:var(--acc)">read the privacy page</a>.</p></details>
     </div>
   </div>
 </section>
@@ -717,14 +788,40 @@
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#">
-      <svg width="16" height="16" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
-      WILCO
-    </a>
-    <div class="fine">WILCO is an independent project, not affiliated with or endorsed by
-      Eagle Dynamics, DCS World, or the DCS-SimpleRadio-Standalone project. Voice AI usage
-      is billed to your own API accounts.</div>
-    <div class="right">© 2026 WILCO</div>
+    <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="logo" href="#">
+          <svg width="16" height="16" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
+          WILCO
+        </a>
+        <p>An AI radio crew for DCS World — Ground, Tower, Approach, AWACS and JTAC,
+           live on your SRS frequencies.</p>
+      </div>
+      <div>
+        <h4>PRODUCT</h4>
+        <a href="https://github.com/khossam963-png/wilco/releases/latest">Download</a>
+        <a href="features.html">Everything it does</a>
+        <a href="#listen">Hear the crew</a>
+        <a href="changelog.html">Changelog</a>
+      </div>
+      <div>
+        <h4>PILOTS</h4>
+        <a href="access.html">Sign in / Sign up</a>
+        <a href="access.html">Your invite code</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>LEGAL &amp; SUPPORT</h4>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms &amp; refunds</a>
+        <a href="https://github.com/khossam963-png/wilco/issues">Support (GitHub)</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <div class="fine">WILCO is an independent project, not affiliated with or endorsed by
+        Eagle Dynamics, DCS World, or the DCS-SimpleRadio-Standalone project.</div>
+      <div class="right">© 2026 WILCO</div>
+    </div>
   </div>
 </footer>
 
@@ -736,6 +833,19 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
 }), {threshold: .12});
 document.querySelectorAll(".rev:not(.in)").forEach(el => io.observe(el));
+
+/* anonymous visit ping — one per browser session, our own counter, no cookies */
+try {
+  if (!sessionStorage.getItem("wilco_hit")) {
+    sessionStorage.setItem("wilco_hit", "1");
+    fetch("https://wilco-relay.wilco-atc.workers.dev/hit", {method: "POST"}).catch(()=>{});
+  }
+} catch (e) {}
+
+/* only one demo clip plays at a time — like a real radio */
+document.querySelectorAll("#listen audio").forEach(a =>
+  a.addEventListener("play", () =>
+    document.querySelectorAll("#listen audio").forEach(o => { if (o !== a) o.pause(); })));
 
 /* ---- the living demo: one script drives the mini-station AND the live bar ---- */
 const FEED = [
