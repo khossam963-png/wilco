@@ -36,7 +36,7 @@ try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="
     --code-fg:#c8ecd7;
     --nav-bg:rgba(4,8,11,.72);
     --sel:rgba(60,227,143,.25);
-    --tint-g:rgba(60,227,143,.06); --tint-a:rgba(245,168,61,.045);
+    --tint-g:rgba(80,170,255,.045); --tint-a:rgba(60,227,143,.03);
     --grain-op:.42; --grain-blend:overlay;
     --audio-filter:invert(.88) hue-rotate(120deg) saturate(.6);
     --ph-glow:0 0 26px rgba(60,227,143,.35);
@@ -45,6 +45,7 @@ try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="
     --cta-sh-h:0 0 0 1px rgba(60,227,143,.6), 0 10px 34px -8px rgba(60,227,143,.6);
     --card-sh:none;
     --card-sh-h:0 18px 44px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(60,227,143,.12);
+    --quote-bg:rgba(7,12,16,.55); --quote-bd:var(--line);
     /* phosphor for the instrument screens (same in both themes) */
     --phos:#3ce38f; --phos-dim:rgba(60,227,143,.55);
     --disp:"Chakra Petch","Instrument Sans",system-ui,sans-serif;
@@ -71,6 +72,7 @@ try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="
     --cta-sh-h:0 2px 4px rgba(10,59,41,.25), 0 14px 34px -12px rgba(10,59,41,.5);
     --card-sh:0 1px 2px rgba(16,31,24,.04);
     --card-sh-h:0 18px 40px -18px rgba(16,31,24,.22);
+    --quote-bg:linear-gradient(180deg,#0b1712,#081009); --quote-bd:transparent;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -217,7 +219,7 @@ try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="
       margin-top:6px;flex:1}
   .fq audio{width:100%;height:32px;margin-top:10px;opacity:.9;filter:var(--audio-filter)}
   .fq .callout{margin-top:12px;font:400 11.5px/1.6 var(--mono);color:var(--txt);
-      border-left:2px solid var(--grn);padding-left:10px}
+      border-left:2px solid var(--grn);padding-left:10px;min-height:56px}
 
   /* ---------- say-anything ---------- */
   .say-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
@@ -279,8 +281,8 @@ try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="
       background:linear-gradient(transparent, rgba(4,8,11,.92) 55%);
       font:500 10.5px var(--mono);letter-spacing:.18em;color:var(--phos);text-transform:uppercase}
 
-  .quoteband{padding:70px 0;background:linear-gradient(180deg,#0b1712,#081009);
-      border-top:1px solid rgba(120,220,170,.14);border-bottom:1px solid rgba(120,220,170,.14)}
+  .quoteband{padding:70px 0;background:var(--quote-bg);
+      border-top:1px solid var(--quote-bd);border-bottom:1px solid var(--quote-bd)}
   .quoteband .q{font:500 clamp(19px,2.6vw,27px)/1.5 var(--mono);color:#c8ecd7;
       max-width:840px;margin:0 auto;text-align:center;padding:0 24px}
   .quoteband .q b{color:var(--phos);font-weight:500}
