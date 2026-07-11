@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WILCO — Pricing</title>
+<meta name="description" content="WILCO pricing — free while in beta, then from $15/month for a two-ship. The whole crew, every feature, priced by how many pilots fly on your net.">
+<link rel="canonical" href="https://khossam963-png.github.io/wilco/pricing.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khossam963-png.github.io/wilco/pricing.html">
+<meta property="og:title" content="WILCO — Pricing">
+<meta property="og:description" content="Free while in beta, then from $15/month for a two-ship. Every feature in every plan — you only pay for seats.">
+<meta property="og:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%236b7d72' stroke-width='2.5'/%3E%3Cpath d='M16 16 L16 4' stroke='%230c8a55' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="day"}catch(e){}
+</script>
+<style>
+  :root{
+    /* NIGHT OPS — the standard theme */
+    --bg:#04080b; --bg2:#0a1118; --card:#0a1118;
+    --line:rgba(120,220,170,.10); --line2:rgba(120,220,170,.22);
+    --txt:#eaf5ee; --body:#8fa598; --dim:#5a6f63;
+    --grn:#3ce38f; --grn-deep:#3ce38f; --cta-fg:#03130b; --cta-bg-h:#3ce38f;
+    --grn-tint:rgba(60,227,143,.09); --grn-bd:rgba(60,227,143,.35);
+    --amber:#f5a83d; --amber-tint:rgba(245,168,61,.09);
+    --nav-bg:rgba(4,8,11,.72);
+    --sel:rgba(60,227,143,.25);
+    --tint-g:rgba(80,170,255,.045); --tint-a:rgba(60,227,143,.03);
+    --cta-sh:0 0 0 1px rgba(60,227,143,.4), 0 6px 28px -8px rgba(60,227,143,.45);
+    --cta-sh-h:0 0 0 1px rgba(60,227,143,.6), 0 10px 34px -8px rgba(60,227,143,.6);
+    --card-sh:none;
+    --card-sh-h:0 18px 44px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(60,227,143,.12);
+    --disp:"Chakra Petch","Instrument Sans",system-ui,sans-serif;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",Consolas,monospace;
+  }
+  html[data-theme="day"]{
+    --bg:#f6f7f4; --bg2:#eef1ec; --card:#ffffff;
+    --line:#e2e7e0; --line2:#c9d3ca;
+    --txt:#101f18; --body:#48584f; --dim:#84928a;
+    --grn:#0c8a55; --grn-deep:#0a3b29; --cta-fg:#f2faf5; --cta-bg-h:#0d4a34;
+    --grn-tint:#e8f4ed; --grn-bd:rgba(12,138,85,.4);
+    --amber:#b26f10; --amber-tint:#fbf1de;
+    --nav-bg:rgba(246,247,244,.82);
+    --sel:rgba(12,138,85,.18);
+    --tint-g:rgba(12,138,85,.05); --tint-a:rgba(178,111,16,.045);
+    --cta-sh:0 1px 2px rgba(10,59,41,.25), 0 10px 28px -12px rgba(10,59,41,.45);
+    --cta-sh-h:0 2px 4px rgba(10,59,41,.25), 0 14px 34px -12px rgba(10,59,41,.5);
+    --card-sh:0 1px 2px rgba(16,31,24,.04);
+    --card-sh-h:0 18px 40px -18px rgba(16,31,24,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{color:var(--body);font:16px/1.65 var(--sans);background:
+      radial-gradient(900px 620px at 78% -6%, var(--tint-g), transparent 60%),
+      radial-gradient(820px 640px at -8% 60%, var(--tint-a), transparent 58%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased}
+  h1,h2,h3{color:var(--txt);font-family:var(--disp);font-weight:600;
+      letter-spacing:.01em;text-wrap:balance}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+  ::selection{background:var(--sel);color:var(--txt)}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;
+      backdrop-filter:blur(14px);background:var(--nav-bg);
+      border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1120px;margin:0 auto;padding:14px 24px;
+      display:flex;align-items:center;gap:26px}
+  .logo{display:flex;align-items:center;gap:10px;font:700 17px var(--disp);
+      color:var(--txt);letter-spacing:.06em}
+  .logo b{color:var(--grn)}
+  .logo svg circle{stroke:currentColor}
+  .logo svg path{stroke:var(--grn)}
+  .nav-links{display:flex;gap:22px;margin-left:auto;font:500 13.5px var(--sans)}
+  .nav-links a{color:var(--body);transition:color .18s}
+  .nav-links a:hover{color:var(--txt)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      padding:12px 22px;border-radius:8px;font:600 14px var(--sans);
+      transition:transform .15s, box-shadow .2s, background .2s;cursor:pointer;border:0}
+  .btn-solid{background:var(--grn-deep);color:var(--cta-fg);box-shadow:var(--cta-sh)}
+  .btn-solid:hover{transform:translateY(-1px);background:var(--cta-bg-h);box-shadow:var(--cta-sh-h)}
+  .btn-ghost{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px var(--line2)}
+  .btn-ghost:hover{background:var(--grn-tint)}
+  .nav-cta{padding:9px 16px;font-size:13px}
+  .nd{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;
+      border:1px solid var(--line2);background:transparent;cursor:pointer}
+  .nd span{font:600 10px var(--mono);letter-spacing:.06em;padding:4px 9px;
+      border-radius:999px;color:var(--dim);transition:background .2s,color .2s}
+  .nd span.on{background:var(--grn-deep);color:var(--cta-fg)}
+
+  .eyebrow{display:flex;align-items:center;gap:10px;font:500 11px var(--mono);
+    color:var(--grn);letter-spacing:.28em;text-transform:uppercase;margin-bottom:18px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--grn);opacity:.7}
+
+  header.top{padding:150px 0 30px;text-align:center}
+  header.top .eyebrow{justify-content:center}
+  header.top h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;margin-bottom:16px}
+  header.top h1 .ph{color:var(--grn)}
+  header.top p{max-width:46em;margin:0 auto;font-size:16.5px}
+  header.top p b{color:var(--txt);font-weight:600}
+
+  .betabar{max-width:760px;margin:34px auto 0;background:var(--grn-tint);
+      border:1px solid var(--grn-bd);border-radius:14px;padding:16px 22px;
+      display:flex;gap:14px;align-items:center;text-align:left}
+  .betabar .led{flex:none;width:9px;height:9px;border-radius:50%;background:var(--grn);
+      box-shadow:0 0 10px var(--grn);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .betabar p{font-size:14px;margin:0}
+  .betabar b{color:var(--txt)}
+
+  /* ---------- plans ---------- */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:56px 0 8px}
+  .plan{position:relative;background:var(--card);border:1px solid var(--line);
+      border-radius:16px;padding:30px 26px 26px;display:flex;flex-direction:column;
+      box-shadow:var(--card-sh);transition:transform .2s, border-color .2s, box-shadow .25s}
+  .plan:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:var(--card-sh-h)}
+  .plan.hero{border-color:var(--grn-bd)}
+  .plan .flag{position:absolute;top:-11px;left:24px;font:600 9.5px var(--mono);
+      letter-spacing:.16em;color:var(--cta-fg);background:var(--grn-deep);
+      border-radius:99px;padding:4px 12px}
+  .plan h2{font-size:19px;letter-spacing:.04em}
+  .plan .who{font:500 11px var(--mono);letter-spacing:.14em;color:var(--dim);
+      text-transform:uppercase;margin:4px 0 18px}
+  .plan .price{font:700 44px/1 var(--disp);color:var(--txt);letter-spacing:-.01em}
+  .plan .price em{font-style:normal;font:500 14px var(--sans);color:var(--dim)}
+  .plan .yr{margin-top:6px;font:400 12px var(--mono);color:var(--dim)}
+  .plan .yr b{color:var(--grn);font-weight:500}
+  .plan .seats{display:flex;gap:5px;margin:18px 0 4px}
+  .plan .seat{width:24px;height:24px;border-radius:6px;border:1px solid var(--grn-bd);
+      background:var(--grn-tint);display:grid;place-items:center}
+  .plan .seat svg{stroke:var(--grn)}
+  .plan .seat.plus{border-style:dashed;font:600 12px var(--mono);color:var(--grn)}
+  .plan .seatlbl{font:400 12.5px var(--sans);color:var(--body);margin-bottom:18px}
+  .plan .seatlbl b{color:var(--txt)}
+  .plan ul{list-style:none;display:grid;gap:9px;margin:0 0 24px;padding-top:18px;
+      border-top:1px dashed var(--line2);flex:1}
+  .plan li{display:flex;gap:9px;font-size:13.5px;color:var(--body)}
+  .plan li svg{flex:none;margin-top:4px;stroke:var(--grn)}
+  .plan li b{color:var(--txt);font-weight:600}
+  .plan .btn{width:100%}
+
+  .allnote{text-align:center;margin:26px auto 0;max-width:56em;font-size:14px;color:var(--dim)}
+  .allnote b{color:var(--body)}
+
+  /* ---------- included ---------- */
+  section{padding:80px 0}
+  .sec-head{max-width:660px;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin-bottom:12px}
+  .sec-head p b{color:var(--txt);font-weight:600}
+  .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .inc{background:var(--card);border:1px solid var(--line);border-radius:12px;
+      padding:18px 18px;box-shadow:var(--card-sh)}
+  .inc h3{font-size:14px;letter-spacing:.03em;margin-bottom:5px;display:flex;gap:9px;align-items:center}
+  .inc h3 svg{stroke:var(--grn);flex:none}
+  .inc p{font-size:12.5px;line-height:1.55;color:var(--body)}
+
+  /* ---------- honesty ---------- */
+  .why{background:linear-gradient(180deg, var(--bg2), transparent 80%);
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+  .why-item{display:flex;gap:14px;padding:13px 0}
+  .why-item svg{flex:none;margin-top:4px;stroke:var(--grn)}
+  .why-item p{font-size:14px;color:var(--body)}
+  .why-item p b{color:var(--txt);font-weight:600}
+
+  /* ---------- faq ---------- */
+  .faq{max-width:760px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{cursor:pointer;list-style:none;display:flex;gap:14px;align-items:baseline;
+      padding:20px 4px;font:500 15.5px var(--sans);color:var(--txt)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::before{content:"›";font:600 16px var(--mono);color:var(--grn);
+      transition:transform .2s;flex:0 0 12px}
+  .faq details[open] summary::before{transform:rotate(90deg)}
+  .faq .a{padding:0 4px 22px 26px;font-size:14.5px;color:var(--body);max-width:64ch}
+  .faq .a b{color:var(--txt);font-weight:600}
+
+  .final{text-align:center;padding:90px 0 110px}
+  .final h2{font-size:clamp(28px,4vw,44px);margin-bottom:14px}
+  .final h2 .ph{color:var(--grn)}
+  .final p{max-width:44em;margin:0 auto 30px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0 44px;font-size:13px;color:var(--dim)}
+  .foot-in{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+  .foot-in a:hover{color:var(--body)}
+  .foot-in .sp{margin-left:auto}
+
+  @media (max-width:900px){
+    .plans{grid-template-columns:1fr}
+    .inc-grid{grid-template-columns:1fr 1fr}
+    .why-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:560px){.inc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#eaf5ee" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#3ce38f" stroke-width="2.4"/></svg>
+      <span>WIL<b>CO</b></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#net">The crew</a>
+      <a href="index.html#brain">The brain</a>
+      <a href="pricing.html" style="color:var(--txt)">Pricing</a>
+      <a href="changelog.html">Changelog</a>
+    </div>
+    <button class="nd" id="nd" title="Night / Day theme" aria-label="Switch between night and day theme"><span id="nd-n">N</span><span id="nd-d">D</span></button>
+    <a class="btn btn-solid nav-cta" href="access.html">Get access</a>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Pricing · when the beta ends</div>
+    <h1>Every feature, every plan.<br>You only pay for <span class="ph">seats.</span></h1>
+    <p>The crew runs <b>100% on your PC</b> — you're not renting cloud compute.
+    One subscription covers your whole net: the host runs WILCO, everyone else just
+    tunes in on SRS. Pick a plan by how many pilots the crew serves.</p>
+
+    <div class="betabar">
+      <span class="led"></span>
+      <p><b>Right now WILCO is a free beta — everything unlocked, no card, no timer.</b>
+      When plans launch, beta pilots keep their founding price for as long as they stay
+      subscribed. Flying in the beta is the cheapest this will ever be.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="plans">
+    <div class="plan hero">
+      <span class="flag">FOUNDING PRICE</span>
+      <h2>DUO</h2>
+      <div class="who">You + your wingman</div>
+      <div class="price">$15<em>/month</em></div>
+      <div class="yr">or <b>$150/year</b> — two months free</div>
+      <div class="seats">
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+      </div>
+      <div class="seatlbl"><b>2 pilots</b> on your net</div>
+      <ul>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>All five controllers — Ground, Tower, Approach, AWACS, JTAC</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>The full local brain — <b>nothing held back</b></span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Voice Studio + every update, day one</span></li>
+      </ul>
+      <a class="btn btn-solid" href="access.html">Fly free in the beta</a>
+    </div>
+
+    <div class="plan">
+      <h2>FLIGHT</h2>
+      <div class="who">A four-ship</div>
+      <div class="price">$25<em>/month</em></div>
+      <div class="yr">or <b>$250/year</b> — two months free</div>
+      <div class="seats">
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+      </div>
+      <div class="seatlbl"><b>4 pilots</b> on your net</div>
+      <ul>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Everything in DUO — same brain, same features</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Flight-aware calls — check-ins and tasking address the whole flight</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>One code for the whole four-ship</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="access.html">Fly free in the beta</a>
+    </div>
+
+    <div class="plan">
+      <h2>SQUADRON</h2>
+      <div class="who">Milsim nights &amp; servers</div>
+      <div class="price">$45<em>/month</em></div>
+      <div class="yr">or <b>$450/year</b> — two months free</div>
+      <div class="seats">
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="seat plus">∞</span>
+      </div>
+      <div class="seatlbl"><b>Unlimited pilots</b> on your net</div>
+      <ul>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Everything in FLIGHT, for the whole server</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Tacview telemetry mode — crew eyes on servers you don't control</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Priority support for your event nights</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="access.html">Fly free in the beta</a>
+    </div>
+  </div>
+  <p class="allnote"><b>No feature gates, ever.</b> The smallest plan gets the same brain,
+  the same voices, the same updates as the biggest. Launch prices — locked in for
+  founding pilots.</p>
+</div>
+
+<!-- ============ what's included ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Included in every plan</div>
+    <div class="sec-head">
+      <h2>One subscription. The whole crew.</h2>
+    </div>
+    <div class="inc-grid">
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Five controllers</h3>
+        <p>Ground, Tower, Approach, AWACS and JTAC on your SRS frequencies — real procedure, readbacks checked in code.</p></div>
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg>The full local brain</h3>
+        <p>11,468 phrasings, tactical judgment, intercept geometry, launch warnings — running on your PC, no cloud fees.</p></div>
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M5 7v10M19 7v10"/></svg>Voice Studio</h3>
+        <p>Clone any voice from a sample recording and train it on your own GPU. Your audio never leaves your machine.</p></div>
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12a9 9 0 11-9-9"/><path d="M21 3v6h-6"/></svg>Every update</h3>
+        <p>The crew improves after every real flight. One click in the Control Station and you're on the newest build.</p></div>
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15l3-3 2 2 4-5"/></svg>The Control Station</h3>
+        <p>Live transcript of every frequency, status lights, one-click ops, plain-red warnings, sortie debrief.</p></div>
+      <div class="inc"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>Kneeboard card</h3>
+        <p>A printable card of every call the crew understands ships in the box — brand new pilots are talking in minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ why it costs money ============ -->
+<section class="why">
+  <div class="wrap">
+    <div class="eyebrow">Straight answer</div>
+    <div class="sec-head">
+      <h2>Why pay, if it runs on my PC?</h2>
+      <p>Fair question — here's exactly what the subscription funds.</p>
+    </div>
+    <div class="why-grid">
+      <div>
+        <div class="why-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <p><b>The brain keeps training.</b> Every release is mined from real flights and
+          re-proven against 50,000 unseen calls before it ships. That work is continuous —
+          your crew is smarter every month you're subscribed.</p></div>
+        <div class="why-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <p><b>Updates, signed and tested.</b> Eight automated test suites gate every
+          release. You get the new build in one click, and it never breaks your config.</p></div>
+      </div>
+      <div>
+        <div class="why-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2c3 3.5 3 16.5 0 20-3-3.5-3-16.5 0-20z"/></svg>
+          <p><b>The service around it.</b> Invite codes, license checks, in-app updates and
+          crash reporting run on real infrastructure we keep alive.</p></div>
+        <div class="why-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg>
+          <p><b>What you never pay for:</b> cloud compute. Understanding, tactics and
+          voices are local — your $15 isn't burning on someone's GPU meter.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ faq ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">Pricing questions</div>
+    <div class="faq">
+      <details><summary>How do "seats" work exactly?</summary>
+        <div class="a">One person — the host — runs WILCO. A <b>seat</b> is a pilot the
+        crew talks to during a session: everyone on your SRS frequencies who checks in.
+        DUO covers you and a wingman, FLIGHT covers a four-ship, SQUADRON covers however
+        many show up on your event night.</div></details>
+      <details><summary>What happens to my beta code when plans launch?</summary>
+        <div class="a">It keeps working — it just gets a plan attached. Subscribe with the
+        same email you signed up with and your code, your settings and your learned
+        phrasings all carry over. <b>Beta pilots keep the founding price</b> for as long as
+        they stay subscribed.</div></details>
+      <details><summary>Do the bigger plans get smarter AI?</summary>
+        <div class="a"><b>No — and that's a promise.</b> Every plan runs the identical
+        brain, voices and features. Seats are the only difference. We think paywalling
+        intelligence is how you get a crew nobody trusts.</div></details>
+      <details><summary>How do payments work?</summary>
+        <div class="a">Checkout runs through our payment partner — international cards
+        and popular local payment methods are accepted, and the receipt lands in your
+        email. Your card details never touch WILCO's servers. Cancel anytime from the
+        same checkout portal; you keep access until the end of the period you paid for.</div></details>
+      <details><summary>Do I need to be online to fly?</summary>
+        <div class="a">Flying is <b>fully offline</b> — the brain and voices live on your
+        PC. The crew does a quick license check when it starts and there's a grace window,
+        so a flaky connection never grounds you mid-campaign.</div></details>
+      <details><summary>Can I upgrade mid-month?</summary>
+        <div class="a">Yes — upgrades take effect immediately and your remaining days are
+        credited toward the bigger plan. Downgrades apply at your next renewal.</div></details>
+      <details><summary>Is there a refund policy?</summary>
+        <div class="a">If WILCO doesn't work for your setup in the first 14 days, write to
+        support and you get your money back. No forms, no fight — we'd rather have the
+        crash report than the fifteen dollars.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ final ============ -->
+<div class="final">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">Open beta · everything free today</div>
+    <h2>Lock in the <span class="ph">founding price</span><br>by flying now.</h2>
+    <p>Grab an invite while the beta is open — every feature, no card. When plans launch,
+    you keep the prices on this page.</p>
+    <a class="btn btn-solid" href="access.html">Get your invite code</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <span style="font-family:var(--mono);letter-spacing:.14em">WILCO</span>
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <span class="sp">Not affiliated with Eagle Dynamics. DCS World is a trademark of its owners.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const nd = document.getElementById("nd");
+  function paint(){
+    const day = document.documentElement.dataset.theme === "day";
+    document.getElementById("nd-n").classList.toggle("on", !day);
+    document.getElementById("nd-d").classList.toggle("on", day);
+  }
+  nd.onclick = () => {
+    const day = document.documentElement.dataset.theme === "day";
+    if (day) delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = "day";
+    try{ localStorage.wilco_theme = day ? "night" : "day"; }catch(e){}
+    paint();
+  };
+  paint();
+})();
+</script>
+</body>
+</html>

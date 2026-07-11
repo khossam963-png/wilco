@@ -499,12 +499,13 @@ function renderPlan(me){
     el.innerHTML = `<div class="planline"><span class="planname">OPEN BETA</span>
         <span class="planmeta">FREE · EVERY FEATURE UNLOCKED</span></div>
       <div class="planhint">You fly free while we tune it. When plans arrive
-      (from <b>$15/month for a two-ship</b>, scaling with your flight size),
+      (from <b>$15/month for a two-ship</b> — <a style="color:var(--grn);border-bottom:1px dotted var(--grn)" href="pricing.html">see the plans</a>),
       <b>beta pilots keep their founding price</b>.</div>`;
   } else {
     el.innerHTML = `<div class="planline"><span class="planname">EXPIRED</span>
         <span class="planmeta">THE BETA HAS ENDED</span></div>
-      <div class="planhint">Keep flying with a plan — from <b>$15/month for a two-ship</b>.
+      <div class="planhint">Keep flying with a plan — from <b>$15/month for a two-ship</b>
+      (<a style="color:var(--grn);border-bottom:1px dotted var(--grn)" href="pricing.html">see the plans</a>).
       <a style="color:var(--grn);border-bottom:1px dotted var(--grn)" href="${SERVICE}/subscribe">Subscribe</a>
       with the same email as this account.</div>`;
   }
