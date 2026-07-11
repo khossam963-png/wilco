@@ -21,34 +21,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#050506;--frame:#0a0a0c;--card:#101013;--line:rgba(255,255,255,.065);
-    --line2:rgba(255,255,255,.12);--txt:#f4f4f5;--body:#9d9da6;--dim:#5e5e68;
-    --acc:#34d399;
+    /* NIGHT — standard, matches the rest of the site */
+    --bg:#04080b;--card:#0a1118;--line:rgba(120,220,170,.10);
+    --line2:rgba(120,220,170,.22);--txt:#eaf5ee;--body:#8fa598;--dim:#5a6f63;
+    --acc:#3ce38f;--nd-fg:#03130b;--nav-bg:rgba(4,8,11,.72);
+    --tint1:rgba(80,170,255,.045);--tint2:rgba(60,227,143,.03);
+    --code-bg:rgba(0,0,0,.35);
     --ground:#e8b06e;--tower:#7ce7b8;--approach:#6ec8e8;--awacs:#b9a3f5;--fac:#f0997a;
     --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
     --mono:"IBM Plex Mono",Consolas,monospace}
+  html[data-theme="day"]{
+    --bg:#f6f7f4;--card:#ffffff;--line:#e2e7e0;--line2:#c9d3ca;
+    --txt:#101f18;--body:#48584f;--dim:#84928a;
+    --acc:#0c8a55;--nd-fg:#f2faf5;--nav-bg:rgba(246,247,244,.82);
+    --tint1:rgba(12,138,85,.05);--tint2:rgba(178,111,16,.04);
+    --code-bg:#eef1ec;
+    --ground:#a06716;--tower:#0c8a55;--approach:#0e7490;--awacs:#6d4fc2;--fac:#b3572e}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{color:var(--body);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
     background:
-      radial-gradient(1100px 700px at 88% 0%,rgba(62,195,216,.07),transparent 62%),
-      radial-gradient(950px 750px at 0% 42%,rgba(52,211,153,.06),transparent 58%),
+      radial-gradient(1100px 700px at 88% 0%,var(--tint1),transparent 62%),
+      radial-gradient(950px 750px at 0% 42%,var(--tint2),transparent 58%),
       var(--bg);
     background-attachment:fixed,fixed,scroll}
-  body::before{content:"";position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
-    mix-blend-mode:overlay}
   h1,h2,h3{color:var(--txt);letter-spacing:-.025em;font-weight:600}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px}
-  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,6,.72);
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--nav-bg);
       backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;gap:32px;height:60px;max-width:1200px;
       margin:0 auto;padding:0 28px}
   .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);
       color:var(--txt);letter-spacing:.14em}
+  .logo svg circle{stroke:currentColor}
+  .logo svg path{stroke:var(--acc)}
   .nav-in a.back{margin-left:auto;font-size:13.5px;color:var(--body)}
   .nav-in a.back:hover{color:var(--txt)}
+  .nd{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;
+      border:1px solid var(--line2);background:transparent;cursor:pointer}
+  .nd span{font:600 10px var(--mono);letter-spacing:.06em;padding:4px 9px;
+      border-radius:999px;color:var(--dim);transition:background .2s,color .2s}
+  .nd span.on{background:var(--acc);color:var(--nd-fg)}
 
   header.page{padding:130px 0 30px;}
   .kicker{font:500 11.5px var(--mono);color:var(--dim);letter-spacing:.24em;
@@ -62,7 +76,7 @@
   /* the sortie timeline */
   .phase{margin-top:64px;position:relative;padding-left:36px}
   .phase::before{content:"";position:absolute;left:8px;top:44px;bottom:-52px;width:1px;
-      background:repeating-linear-gradient(180deg,rgba(255,255,255,.14) 0 6px,transparent 6px 12px)}
+      background:repeating-linear-gradient(180deg,var(--line2) 0 6px,transparent 6px 12px)}
   .phase:last-of-type::before{display:none}
   .phase > h2{display:flex;align-items:center;gap:14px;font-size:22px;margin-bottom:6px;
       margin-left:-36px}
@@ -78,14 +92,15 @@
   .f:first-child{border-top:none}
   .f b{flex:0 0 240px;color:var(--txt);font-weight:600;font-size:14.5px}
   .f span{font-size:14px;color:var(--body)}
-  .f span code{font:12px var(--mono);color:color-mix(in srgb,var(--pc,var(--acc)) 75%,#fff 10%);
-      background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
+  .f span code{font:12px var(--mono);
+      color:color-mix(in srgb,var(--pc,var(--acc)) 70%,var(--txt) 30%);
+      background:var(--code-bg);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
 
   .under{margin-top:90px;border-top:1px solid var(--line);padding-top:50px}
   .under h2{font-size:26px;margin-bottom:8px}
   .under > p{margin-bottom:26px;max-width:620px}
   .ugrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .ucell{background:linear-gradient(180deg,#131317,var(--card));border:1px solid var(--line);
+  .ucell{background:var(--card);border:1px solid var(--line);
       border-radius:14px;padding:22px 24px}
   .ucell h3{font-size:15.5px;margin-bottom:6px}
   .ucell p{font-size:13.5px;color:var(--dim)}
@@ -93,8 +108,8 @@
   .cta{text-align:center;padding:100px 0 90px}
   .cta h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:24px;letter-spacing:-.03em}
   .btn{display:inline-flex;align-items:center;gap:8px;font:600 14.5px var(--sans);
-      padding:12px 26px;border-radius:99px;background:#fff;color:#0b0b0d;transition:.16s}
-  .btn:hover{background:#e9e9ee;transform:translateY(-1px)}
+      padding:12px 26px;border-radius:99px;background:var(--acc);color:var(--nd-fg);transition:.16s}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
   footer{border-top:1px solid var(--line);padding:30px 0 40px;font-size:12.5px;color:var(--dim)}
   @media (max-width:760px){
     .f{flex-direction:column;gap:3px}
@@ -111,7 +126,23 @@
     WILCO
   </a>
   <a class="back" href="index.html">← Back to the overview</a>
+  <button class="nd" id="nd" title="Night / Day theme" aria-label="Switch between night and day theme"><span id="nd-n">N</span><span id="nd-d">D</span></button>
 </div></nav>
+<script>
+(function(){
+  try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="day"}catch(e){}
+  const nd=document.getElementById("nd");
+  function paint(){const day=document.documentElement.dataset.theme==="day";
+    document.getElementById("nd-n").classList.toggle("on",!day);
+    document.getElementById("nd-d").classList.toggle("on",day)}
+  nd.onclick=()=>{const day=document.documentElement.dataset.theme==="day";
+    if(day)delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme="day";
+    try{localStorage.wilco_theme=day?"night":"day"}catch(e){}
+    paint()};
+  paint();
+})();
+</script>
 
 <div class="wrap">
   <header class="page">
@@ -209,9 +240,9 @@
     <p>The parts you don't see — they're why it feels like a person and not a chatbot.</p>
     <div class="ugrid">
       <div class="ucell"><h3>It hears like a wingman</h3><p>Whisper STT is fed the live callsigns and station names each call, garbled station names get repaired ("over lowered" → Overlord), and mangled radio gets a human "say again" — never a guess.</p></div>
-      <div class="ucell"><h3>~1.5–2.5s replies</h3><p>Transcription starts while you're still pausing, the AI's memory is kept permanently warm, and the voice starts speaking on the first clause — with a squelch click the moment you're heard.</p></div>
+      <div class="ucell"><h3>Sub-second to ~1.5s replies</h3><p>The local brain understands a call in under 100 ms, transcription starts while you're still pausing, and the voice starts speaking the moment your call is complete — with a squelch click when you're heard.</p></div>
       <div class="ucell"><h3>Never invents</h3><p>Every position, frequency and threat comes from live data. Empty picture = "clean". Dead feed = "negative radar contact". No ghost traffic, ever.</p></div>
-      <div class="ucell"><h3>Survives everything</h3><p>API hiccup → retries, then a calm "stand by". Voice service down → offline voice for that call. SRS restart → auto-reconnects. A controller never dies mid-mission.</p></div>
+      <div class="ucell"><h3>Survives everything</h3><p>Internet down → nothing changes, the brain is local. Optional cloud AI unreachable → the local brain takes over the same second. SRS restart → auto-reconnects. A controller never dies mid-mission.</p></div>
       <div class="ucell"><h3>One crew, one story</h3><p>Controllers share a flight strip: Tower already knows what Ground told you. Handoffs come with the right name and the right frequency — from the comm plan, never invented.</p></div>
       <div class="ucell"><h3>Knows who's talking</h3><p>Fuzzy callsign matching, self-renamed pilots tracked, two humans told apart by their stated altitude/heading, and pilot-to-pilot chatter ignored on busy freqs.</p></div>
       <div class="ucell"><h3>Any map, any side</h3><p>Auto-learns every airfield on the loaded map with a generated comm plan. Flies blue or red. Active runway follows the wind.</p></div>
