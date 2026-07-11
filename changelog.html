@@ -18,15 +18,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#f6f7f4;--card:#ffffff;--line:#e2e7e0;--line2:#c9d3ca;
-    --txt:#101f18;--body:#48584f;--dim:#84928a;--acc:#0c8a55;
+  :root{--bg:#050506;--card:#101013;--line:rgba(255,255,255,.065);--line2:rgba(255,255,255,.12);
+    --txt:#f4f4f5;--body:#9d9da6;--dim:#5e5e68;--acc:#34d399;
+    --acc-bd:rgba(52,211,153,.35);--tint:rgba(52,211,153,.07);--nav-bg:rgba(5,5,6,.72);
+    --nd-fg:#0b0b0d;
     --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+  html[data-theme="day"]{--bg:#f6f7f4;--card:#ffffff;--line:#e2e7e0;--line2:#c9d3ca;
+    --txt:#101f18;--body:#48584f;--dim:#84928a;--acc:#0c8a55;
+    --acc-bd:rgba(12,138,85,.35);--tint:rgba(12,138,85,.05);--nav-bg:rgba(246,247,244,.82);
+    --nd-fg:#f2faf5}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:radial-gradient(900px 500px at 85% -5%,rgba(12,138,85,.05),transparent 60%),var(--bg);
+  body{background:radial-gradient(900px 500px at 85% -5%,var(--tint),transparent 60%),var(--bg);
     color:var(--body);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-  nav{border-bottom:1px solid var(--line);background:rgba(246,247,244,.82);backdrop-filter:blur(16px)}
+  nav{border-bottom:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(16px)}
   .nav-in{display:flex;align-items:center;gap:24px;height:60px;max-width:1200px;margin:0 auto;padding:0 28px}
   .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);color:var(--txt);letter-spacing:.14em}
   .nav-in a.back{margin-left:auto;font-size:13.5px}
@@ -43,7 +49,14 @@
   .rel h2{color:var(--txt);font-size:21px;letter-spacing:-.01em}
   .rel .date{font:12px var(--mono);color:var(--dim);letter-spacing:.08em}
   .rel .badge{font:500 10px var(--mono);letter-spacing:.1em;color:var(--acc);
-    border:1px solid rgba(12,138,85,.35);border-radius:6px;padding:2px 8px}
+    border:1px solid var(--acc-bd);border-radius:6px;padding:2px 8px}
+  .logo svg circle{stroke:currentColor}
+  .logo svg path{stroke:var(--acc)}
+  .nd{display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;
+      border:1px solid var(--line2);background:transparent;cursor:pointer;margin-left:14px}
+  .nd span{font:600 10px var(--mono);letter-spacing:.06em;padding:4px 9px;
+      border-radius:999px;color:var(--dim);transition:background .2s,color .2s}
+  .nd span.on{background:var(--acc);color:var(--nd-fg)}
   ul{margin:0 0 10px 20px}
   li{margin-bottom:7px}
   b{color:var(--txt);font-weight:600}
@@ -57,9 +70,25 @@
 </head>
 <body>
 <nav><div class="nav-in">
-  <a class="logo" href="index.html"><svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#101f18" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#0c8a55" stroke-width="2.4"/></svg>WILCO</a>
+  <a class="logo" href="index.html"><svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>WILCO</a>
   <a class="back" href="index.html">← Back to the site</a>
+  <button class="nd" id="nd" title="Night / Day theme" aria-label="Switch between night and day theme"><span id="nd-n">N</span><span id="nd-d">D</span></button>
 </div></nav>
+<script>
+(function(){
+  try{if(localStorage.wilco_theme==="day")document.documentElement.dataset.theme="day"}catch(e){}
+  const nd=document.getElementById("nd");
+  function paint(){const day=document.documentElement.dataset.theme==="day";
+    document.getElementById("nd-n").classList.toggle("on",!day);
+    document.getElementById("nd-d").classList.toggle("on",day)}
+  nd.onclick=()=>{const day=document.documentElement.dataset.theme==="day";
+    if(day)delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme="day";
+    try{localStorage.wilco_theme=day?"night":"day"}catch(e){}
+    paint()};
+  paint();
+})();
+</script>
 <main><div class="wrap">
   <h1>Changelog</h1>
   <div class="sub">THE CREW GETS BETTER AFTER EVERY REAL FLIGHT</div>
