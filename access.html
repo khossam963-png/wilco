@@ -4,165 +4,209 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WILCO — Pilot profile</title>
-<meta name="description" content="Create your WILCO account — your invite code, allowance, downloads and referrals in one place.">
+<meta name="description" content="Your WILCO pilot record — invite code, plan, allowance, downloads and referrals in one place.">
 <link rel="canonical" href="https://khossam963-png.github.io/wilco/access.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://khossam963-png.github.io/wilco/access.html">
 <meta property="og:title" content="WILCO — Pilot profile">
-<meta property="og:description" content="Create your WILCO account — your invite code, allowance, downloads and referrals in one place.">
+<meta property="og:description" content="Your WILCO pilot record — invite code, plan, allowance, downloads and referrals in one place.">
 <meta property="og:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="WILCO — Pilot profile">
 <meta name="twitter:image" content="https://khossam963-png.github.io/wilco/assets/control-station.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23f4f4f5' stroke-width='2.4'/%3E%3Cpath d='M16 16 L16 4' stroke='%2334d399' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%236b7d72' stroke-width='2.5'/%3E%3Cpath d='M16 16 L16 4' stroke='%230c8a55' stroke-width='2.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#050506;--card:#101013;--line:rgba(255,255,255,.065);--line2:rgba(255,255,255,.12);
-    --txt:#f4f4f5;--body:#9d9da6;--dim:#5e5e68;--acc:#34d399;--red:#f87171;--gold:#eab308;
-    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+  :root{
+    --bg:#f6f7f4; --bg2:#eef1ec; --card:#ffffff;
+    --line:#e2e7e0; --line2:#c9d3ca;
+    --txt:#101f18; --body:#48584f; --dim:#84928a;
+    --grn:#0c8a55; --grn-deep:#0a3b29; --grn-tint:#e8f4ed;
+    --amber:#b26f10; --amber-tint:#fbf1de; --red:#c0392b;
+    --disp:"Chakra Petch","Instrument Sans",system-ui,sans-serif;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",Consolas,monospace;
+  }
   *{box-sizing:border-box;margin:0;padding:0}
   body{min-height:100vh;display:flex;flex-direction:column;color:var(--body);
     font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
     background:
-      radial-gradient(900px 600px at 80% -10%,rgba(52,211,153,.09),transparent 60%),
-      radial-gradient(700px 500px at 10% 100%,rgba(62,195,216,.06),transparent 60%),
+      radial-gradient(900px 600px at 80% -10%,rgba(12,138,85,.05),transparent 60%),
+      radial-gradient(700px 500px at 10% 100%,rgba(178,111,16,.04),transparent 60%),
       var(--bg)}
-  body::before{content:"";position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
-    mix-blend-mode:overlay}
   a{color:inherit;text-decoration:none}
-  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,6,.72);
+  ::selection{background:rgba(12,138,85,.18);color:var(--txt)}
+  h1,h2,h3{font-family:var(--disp)}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(246,247,244,.85);
       backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;gap:32px;height:60px;max-width:1200px;
-      margin:0 auto;padding:0 28px}
-  .logo{display:flex;align-items:center;gap:9px;font:600 16px var(--sans);
-      color:var(--txt);letter-spacing:.14em}
+  .nav-in{display:flex;align-items:center;gap:32px;height:60px;max-width:1120px;
+      margin:0 auto;padding:0 24px}
+  .logo{display:flex;align-items:center;gap:9px;font:700 16px var(--disp);
+      color:var(--txt);letter-spacing:.08em}
+  .logo b{color:var(--grn)}
   .nav-in a.back{margin-left:auto;font-size:13.5px;color:var(--body)}
   .nav-in a.back:hover{color:var(--txt)}
 
   main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:104px 24px 60px}
-  .kicker{font:500 11px var(--mono);color:var(--dim);letter-spacing:.24em;
-      text-transform:uppercase;display:block;margin-bottom:14px}
-  .kicker::before{content:"— ";color:var(--acc)}
-  h1{color:var(--txt);font-size:26px;font-weight:700;letter-spacing:-.03em;margin-bottom:10px}
+  .kicker{display:flex;align-items:center;gap:10px;font:500 10.5px var(--mono);
+      color:var(--grn);letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px}
+  .kicker::before{content:"";width:22px;height:1px;background:var(--grn);opacity:.7}
+  h1{color:var(--txt);font-size:26px;font-weight:700;letter-spacing:.01em;margin-bottom:10px}
   .sub{font-size:14px;margin-bottom:24px}
   .sub b{color:var(--txt);font-weight:600}
 
   /* ---------- auth card ---------- */
-  .authcard{width:100%;max-width:440px;background:linear-gradient(180deg,#131317,var(--card));
-      border:1px solid var(--line2);border-radius:20px;padding:40px 42px 34px;text-align:center;
-      box-shadow:0 40px 110px rgba(0,0,0,.6);margin-top:5vh}
-  .tabs{display:flex;background:rgba(0,0,0,.35);border:1px solid var(--line2);
+  .authcard{width:100%;max-width:440px;background:var(--card);
+      border:1px solid var(--line);border-radius:18px;padding:38px 40px 32px;
+      box-shadow:0 1px 2px rgba(16,31,24,.05), 0 30px 70px -30px rgba(16,31,24,.25);margin-top:5vh}
+  .authcard .kicker{justify-content:center}
+  .authcard h1,.authcard .sub{text-align:center}
+  .tabs{display:flex;background:var(--bg2);border:1px solid var(--line);
       border-radius:11px;padding:4px;margin-bottom:22px}
   .tabs button{flex:1;background:transparent;color:var(--dim);border:none;border-radius:8px;
       padding:9px 0;font:600 13px var(--sans);cursor:pointer;transition:.15s}
-  .tabs button.on{background:#fff;color:#0b0b0d}
+  .tabs button.on{background:#fff;color:var(--txt);box-shadow:0 1px 3px rgba(16,31,24,.12)}
   .field{margin-bottom:10px;text-align:left}
   .field label{display:block;font:500 10px var(--mono);letter-spacing:.18em;
       color:var(--dim);margin:0 0 5px 2px;text-transform:uppercase}
-  input{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:11px;
-      color:var(--txt);padding:12px 15px;font:500 14px var(--sans);outline:none}
-  input:focus{border-color:rgba(52,211,153,.55)}
-  .cta{width:100%;font:600 14.5px var(--sans);color:#0b0b0d;background:#fff;border:none;
-      cursor:pointer;border-radius:11px;padding:13px;margin-top:8px;transition:.15s}
-  .cta:hover{background:#e6e6eb}
+  input{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;
+      color:var(--txt);padding:12px 15px;font:500 14px var(--sans);outline:none;
+      transition:border-color .15s, box-shadow .15s}
+  input:focus{border-color:var(--grn);box-shadow:0 0 0 3px rgba(12,138,85,.12)}
+  input::placeholder{color:#a9b5ad}
+  .cta{width:100%;font:600 14.5px var(--sans);color:#f2faf5;background:var(--grn-deep);border:none;
+      cursor:pointer;border-radius:10px;padding:13px;margin-top:8px;transition:.15s;
+      box-shadow:0 1px 2px rgba(10,59,41,.25), 0 10px 24px -12px rgba(10,59,41,.45)}
+  .cta:hover{background:#0d4a34}
   .cta:disabled{opacity:.5;cursor:wait}
-  #msg{min-height:20px;margin-top:13px;font-size:13px;color:var(--dim)}
-  #msg.bad{color:var(--red)}
-  #msg.good{color:var(--acc)}
-  .aux{margin-top:14px;font-size:12.5px}
+  #msg{min-height:20px;margin-top:13px;font-size:13px;color:var(--dim);text-align:center}
+  #msg.bad,#rmsg.bad{color:var(--red)}
+  #msg.good,#rmsg.good{color:var(--grn)}
+  #rmsg{min-height:20px;margin-top:13px;font-size:13px;color:var(--dim);text-align:center}
+  .aux{margin-top:14px;font-size:12.5px;text-align:center}
   .aux a{color:var(--dim);border-bottom:1px dotted var(--dim);cursor:pointer}
   .aux a:hover{color:var(--txt)}
   .fine{margin-top:24px;font-size:12px;color:var(--dim);line-height:1.7;text-align:center}
+  .fine b{color:var(--body)}
 
   /* ---------- profile ---------- */
-  .profile{display:none;width:100%;max-width:780px}
+  .profile{display:none;width:100%;max-width:860px}
   .profile.show{display:block}
-  .phead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
-  .phead h1{margin:0;font-size:24px}
+  .phead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .phead h1{margin:0;font-size:25px}
   .who{font:500 12.5px var(--mono);color:var(--dim)}
   .badge{font:600 9.5px var(--mono);letter-spacing:.14em;border-radius:99px;
       padding:4px 11px;border:1px solid}
-  .b-beta{color:var(--acc);border-color:rgba(52,211,153,.4)}
-  .b-prem{color:#3ec3d8;border-color:rgba(62,195,216,.4)}
-  .b-unl{color:var(--txt);border-color:var(--line2)}
-  .b-sub{color:var(--acc);border-color:rgba(52,211,153,.4)}
-  .b-vip{color:var(--gold);border-color:rgba(234,179,8,.45)}
-  .b-adm{color:var(--gold);border-color:rgba(234,179,8,.45)}
-  .signout{margin-left:auto;background:transparent;border:1px solid var(--line2);
+  .b-beta{color:var(--grn);border-color:rgba(12,138,85,.4);background:var(--grn-tint)}
+  .b-prem{color:#0e7490;border-color:rgba(14,116,144,.35);background:#e8f4f6}
+  .b-unl{color:var(--txt);border-color:var(--line2);background:#fff}
+  .b-sub{color:var(--grn);border-color:rgba(12,138,85,.4);background:var(--grn-tint)}
+  .b-vip{color:var(--amber);border-color:rgba(178,111,16,.4);background:var(--amber-tint)}
+  .b-adm{color:var(--amber);border-color:rgba(178,111,16,.4);background:var(--amber-tint)}
+  .signout{margin-left:auto;background:#fff;border:1px solid var(--line2);
       color:var(--body);border-radius:99px;padding:7px 16px;font:500 12.5px var(--sans);
       cursor:pointer}
-  .signout:hover{color:var(--txt);border-color:rgba(255,255,255,.3)}
+  .signout:hover{color:var(--txt);border-color:var(--dim)}
+  .psub{font:500 11px var(--mono);letter-spacing:.2em;color:var(--dim);
+      text-transform:uppercase;margin-bottom:24px}
 
   .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .pc{background:linear-gradient(180deg,#131317,var(--card));border:1px solid var(--line2);
-      border-radius:18px;padding:24px 26px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+  .pc{background:var(--card);border:1px solid var(--line);
+      border-radius:16px;padding:24px 26px;
+      box-shadow:0 1px 2px rgba(16,31,24,.04), 0 18px 44px -28px rgba(16,31,24,.18)}
   .pc.wide{grid-column:1/-1}
   .pc h2{font:500 10.5px var(--mono);letter-spacing:.22em;color:var(--dim);
-      text-transform:uppercase;margin-bottom:16px}
-  .pc h2::before{content:"— ";color:var(--acc)}
+      text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+  .pc h2::before{content:"";width:18px;height:1px;background:var(--grn);opacity:.8}
   @media (max-width:720px){.pgrid{grid-template-columns:1fr}}
 
+  /* boarding-pass code card */
+  .pass{display:flex;align-items:stretch;gap:0;overflow:hidden}
+  .pass .left{flex:1;min-width:0}
+  .pass .stub{flex:0 0 168px;margin:-24px -26px -24px 20px;padding:24px 20px;
+      border-left:1.5px dashed var(--line2);background:var(--bg2);
+      display:flex;flex-direction:column;justify-content:center;gap:6px}
+  .pass .stub .k{font:500 9px var(--mono);letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+  .pass .stub .v{font:600 13px var(--mono);color:var(--txt)}
+  @media (max-width:720px){.pass{flex-direction:column}
+    .pass .stub{margin:16px -26px -24px;border-left:0;border-top:1.5px dashed var(--line2);
+      flex-direction:row;gap:22px;flex:none}}
   .codebox{display:flex;gap:8px;align-items:center}
-  .codeval{flex:1;font:600 19px var(--mono);letter-spacing:.08em;color:var(--acc);
-      background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.35);
-      border-radius:11px;padding:12px 16px;user-select:all;text-align:center}
-  .ghost{padding:12px 15px;background:transparent;border:1px solid var(--line2);
-      color:var(--body);border-radius:11px;font:600 13px var(--sans);cursor:pointer}
-  .ghost:hover{border-color:rgba(255,255,255,.35);color:var(--txt)}
+  .codeval{flex:1;font:600 19px var(--mono);letter-spacing:.08em;color:var(--grn-deep);
+      background:var(--grn-tint);border:1px solid rgba(12,138,85,.3);
+      border-radius:10px;padding:12px 16px;user-select:all;text-align:center;min-width:0}
+  .ghost{padding:12px 15px;background:#fff;border:1px solid var(--line2);
+      color:var(--body);border-radius:10px;font:600 13px var(--sans);cursor:pointer;white-space:nowrap}
+  .ghost:hover{border-color:var(--dim);color:var(--txt)}
   .pc .hint{margin-top:12px;font-size:12px;color:var(--dim);line-height:1.65}
   .pc .hint b{color:var(--body);font-weight:600}
 
-  .meter{height:10px;background:rgba(0,0,0,.4);border:1px solid var(--line2);
+  /* plan */
+  .planline{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .planname{font:700 24px var(--disp);color:var(--txt);letter-spacing:.02em}
+  .planmeta{font:500 11.5px var(--mono);color:var(--dim);letter-spacing:.06em}
+  .seatrow{display:flex;gap:6px;margin:14px 0 4px}
+  .seat{width:26px;height:26px;border-radius:7px;border:1px solid var(--line2);
+      display:grid;place-items:center;background:#fff}
+  .seat.on{background:var(--grn-tint);border-color:rgba(12,138,85,.4)}
+  .seat svg{stroke:var(--dim)}
+  .seat.on svg{stroke:var(--grn)}
+  .planhint{margin-top:10px;font-size:12px;color:var(--dim);line-height:1.65}
+  .planhint b{color:var(--body)}
+
+  .meter{height:10px;background:var(--bg2);border:1px solid var(--line);
       border-radius:99px;overflow:hidden;margin:6px 0 8px}
-  .meter i{display:block;height:100%;background:linear-gradient(90deg,#34d399,#3ec3d8);
+  .meter i{display:block;height:100%;background:linear-gradient(90deg,#0c8a55,#31b57e);
       border-radius:99px;transition:width .6s}
   .meterlbl{display:flex;justify-content:space-between;font:500 11px var(--mono);color:var(--dim)}
-  .bignum{font:600 30px var(--sans);color:var(--txt);letter-spacing:-.02em}
+  .bignum{font:600 30px var(--disp);color:var(--txt);letter-spacing:-.02em}
 
-  .dl{display:inline-block;background:#fff;color:#0b0b0d;border-radius:11px;
-      padding:12px 22px;font:600 14px var(--sans);transition:.15s}
-  .dl:hover{background:#e6e6eb}
-  .vertag{font:500 11px var(--mono);color:var(--acc);margin-left:10px}
+  .dl{display:inline-block;background:var(--grn-deep);color:#f2faf5;border-radius:10px;
+      padding:12px 22px;font:600 14px var(--sans);transition:.15s;
+      box-shadow:0 1px 2px rgba(10,59,41,.25), 0 10px 24px -12px rgba(10,59,41,.45)}
+  .dl:hover{background:#0d4a34}
+  .vertag{font:500 11px var(--mono);color:var(--grn);margin-left:10px}
   .notes{margin-top:12px;font-size:12.5px;color:var(--body);line-height:1.7;
-      border-left:2px solid rgba(52,211,153,.35);padding-left:12px;white-space:pre-line}
+      border-left:2px solid rgba(12,138,85,.4);padding-left:12px;white-space:pre-line}
 
-  .acc-form{display:none;margin-top:14px}
+  .acc-form{display:none;margin-top:14px;max-width:340px}
   .acc-form.show{display:block}
 
   /* ---------- admin ---------- */
   #adminwrap{display:none;margin-top:26px}
   #adminwrap.show{display:block}
   .opshead{display:flex;align-items:baseline;gap:14px;margin:6px 0 14px}
-  .opshead h2{font:500 11px var(--mono);letter-spacing:.24em;color:var(--gold);
+  .opshead h2{font:500 11px var(--mono);letter-spacing:.24em;color:var(--amber);
       text-transform:uppercase}
-  .opshead h2::before{content:"— ";}
+  .opshead h2::before{content:"— "}
   .opshead a{font-size:12.5px;color:var(--dim);border-bottom:1px dotted var(--dim)}
   .opshead a:hover{color:var(--txt)}
   .statrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-  .stat{background:var(--card);border:1px solid var(--line2);border-radius:12px;
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;
       padding:10px 16px;text-align:center}
-  .stat b{display:block;font:700 18px var(--sans);color:var(--txt)}
+  .stat b{display:block;font:700 18px var(--disp);color:var(--txt)}
   .stat span{font:500 9px var(--mono);letter-spacing:.16em;color:var(--dim)}
   .viprow{display:flex;gap:8px}
   .viprow input{flex:1}
-  .vipout{display:none;margin-top:14px;background:rgba(234,179,8,.05);
-      border:1px solid rgba(234,179,8,.3);border-radius:12px;padding:16px 18px;
+  .vipout{display:none;margin-top:14px;background:var(--amber-tint);
+      border:1px solid rgba(178,111,16,.3);border-radius:12px;padding:16px 18px;
       font:500 13px var(--mono);color:var(--txt);line-height:2}
   .vipout.show{display:block}
   .vipout .k{color:var(--dim);font-size:10.5px;letter-spacing:.14em}
 
   footer{padding:22px;text-align:center;font-size:12px;color:var(--dim)}
+  footer a:hover{color:var(--body)}
 </style>
 </head>
 <body>
 <nav><div class="nav-in">
   <a class="logo" href="index.html">
-    <svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#f4f4f5" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#34d399" stroke-width="2.4"/></svg>
-    WILCO
+    <svg width="19" height="19" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#101f18" stroke-width="2.4"/><path d="M16 16 L16 4" stroke="#0c8a55" stroke-width="2.4"/></svg>
+    <span>WIL<b>CO</b></span>
   </a>
   <a class="back" href="index.html">← Back to the overview</a>
 </div></nav>
@@ -172,7 +216,7 @@
   <div class="authcard" id="auth">
     <span class="kicker">Pilot access</span>
     <h1 id="auth-h1">Create your account.</h1>
-    <p class="sub" id="auth-sub">Your invite code, allowance and downloads —
+    <p class="sub" id="auth-sub">Your invite code, plan and downloads —
        one place, one password.</p>
     <div class="tabs">
       <button id="t-up" class="on">Create account</button>
@@ -188,7 +232,7 @@
     <div id="msg"></div>
     <div class="aux"><a id="forgot">Forgot your password?</a></div>
     <div class="fine">Free beta. Your email is only your login — no newsletters, no
-      sharing. <b style="color:var(--body)">Your invite code doubles as your password
+      sharing. <b>Your invite code doubles as your password
       recovery key</b>, so keep it saved.</div>
   </div>
 
@@ -208,22 +252,34 @@
 
   <!-- ============ PROFILE ============ -->
   <div class="profile" id="profile">
+    <span class="kicker">Pilot record</span>
     <div class="phead">
-      <h1>Pilot profile</h1>
-      <span class="who" id="p-who"></span>
+      <h1 id="p-who-h">Pilot profile</h1>
       <span id="p-badges"></span>
       <button class="signout" id="p-out">Sign out</button>
     </div>
+    <div class="psub" id="p-who"></div>
 
     <div class="pgrid">
-      <div class="pc wide">
-        <h2>Your invite code</h2>
-        <div class="codebox">
-          <span class="codeval" id="p-code">—</span>
-          <button class="ghost" id="p-copy">Copy</button>
+      <div class="pc wide pass">
+        <div class="left">
+          <h2>Your invite code</h2>
+          <div class="codebox">
+            <span class="codeval" id="p-code">—</span>
+            <button class="ghost" id="p-copy">Copy</button>
+          </div>
+          <div class="hint">Paste this into WILCO when the Control Station asks.
+            It's also your <b>password recovery key</b> — keep it saved somewhere safe.</div>
         </div>
-        <div class="hint">Paste this into WILCO when the Control Station asks.
-          It's also your <b>password recovery key</b> — keep it saved somewhere safe.</div>
+        <div class="stub">
+          <div><span class="k">Net</span><div class="v">251.0–255.0</div></div>
+          <div><span class="k">Stations</span><div class="v">GND·TWR·APP·AWACS·JTAC</div></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <h2>Your plan</h2>
+        <div id="p-plan"></div>
       </div>
 
       <div class="pc">
@@ -242,24 +298,24 @@
         <div class="hint" id="p-refhint"></div>
       </div>
 
-      <div class="pc wide">
-        <h2>Download WILCO</h2>
-        <a class="dl" href="https://github.com/khossam963-png/wilco/releases/latest" target="_blank" rel="noopener">Download the beta</a>
-        <span class="vertag" id="p-ver"></span>
-        <div class="notes" id="p-notes" style="display:none"></div>
-        <div class="hint">Run <b>WILCO_Setup.exe</b> — it installs and sets everything
-          up, then asks for your code. Windows SmartScreen: <b>More info → Run anyway</b>.</div>
-      </div>
-
-      <div class="pc wide">
+      <div class="pc">
         <h2>Security</h2>
-        <a class="aux" style="font-size:13px"><span id="p-pwlink" style="color:var(--body);border-bottom:1px dotted var(--dim);cursor:pointer">Change password</span></a>
+        <a class="aux" style="font-size:13px;text-align:left"><span id="p-pwlink" style="color:var(--body);border-bottom:1px dotted var(--dim);cursor:pointer">Change password</span></a>
         <div class="acc-form" id="pwform">
           <div class="field"><label for="pw-old">Current password</label><input id="pw-old" type="password"></div>
           <div class="field"><label for="pw-new">New password</label><input id="pw-new" type="password"></div>
           <button class="cta" id="pw-go" style="max-width:220px">Update password</button>
         </div>
         <div id="pwmsg" style="min-height:18px;margin-top:8px;font-size:12.5px;color:var(--dim)"></div>
+      </div>
+
+      <div class="pc wide">
+        <h2>Download WILCO</h2>
+        <a class="dl" href="https://github.com/khossam963-png/wilco/releases/latest" target="_blank" rel="noopener">Download the beta</a>
+        <span class="vertag" id="p-ver"></span>
+        <div class="notes" id="p-notes" style="display:none"></div>
+        <div class="hint">Run the installer — it sets everything up in-app, then asks for
+          your code. Windows SmartScreen: <b>More info → Run anyway</b>.</div>
       </div>
     </div>
 
@@ -271,10 +327,10 @@
       </div>
       <div class="statrow" id="ops-stats"></div>
       <div class="pc wide">
-        <h2 style="color:var(--gold)">VIP generator</h2>
+        <h2 style="color:var(--amber)">VIP generator</h2>
         <div class="viprow">
           <input id="vip-note" type="text" placeholder="who is this for? e.g. 'YouTube — Grim Reapers'">
-          <button class="ghost" id="vip-go" style="border-color:rgba(234,179,8,.45);color:var(--gold)">Generate VIP</button>
+          <button class="ghost" id="vip-go" style="border-color:rgba(178,111,16,.45);color:var(--amber)">Generate VIP</button>
         </div>
         <div class="vipout" id="vip-out"></div>
         <div class="hint">One click creates a callsign login + password + a
@@ -285,11 +341,11 @@
 </main>
 
 <footer style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center">
-  <a href="index.html" style="color:inherit;text-decoration:none">Home</a>
-  <a href="changelog.html" style="color:inherit;text-decoration:none">Changelog</a>
-  <a href="privacy.html" style="color:inherit;text-decoration:none">Privacy</a>
-  <a href="terms.html" style="color:inherit;text-decoration:none">Terms</a>
-  <a href="https://github.com/khossam963-png/wilco/issues" style="color:inherit;text-decoration:none">Support</a>
+  <a href="index.html">Home</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <a href="https://github.com/khossam963-png/wilco/issues">Support</a>
   <span style="opacity:.7">· WILCO is an independent project, not affiliated with Eagle Dynamics or DCS World.</span>
 </footer>
 
@@ -369,21 +425,56 @@ $("r-go").onclick = async () => {
 
 /* profile */
 function badge(cls, text){ return `<span class="badge ${cls}">${text}</span> `; }
+function seatIcons(n){
+  let out = '<div class="seatrow">';
+  const shown = Math.min(n || 0, 8);
+  for (let i = 0; i < shown; i++)
+    out += '<span class="seat on"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>';
+  out += "</div>";
+  return out;
+}
+function renderPlan(me){
+  const el = $("p-plan");
+  if (me.subscribed){
+    const until = me.sub_until ? new Date(me.sub_until).toISOString().slice(0,10) : "—";
+    el.innerHTML = `<div class="planline"><span class="planname">${me.plan || "DUO"}</span>
+        <span class="planmeta">ACTIVE · RENEWS ${until}</span></div>` +
+      (me.seats ? seatIcons(me.seats) +
+        `<div class="planhint"><b>${me.seats} pilots</b> on your net — the crew serves
+         your whole flight on one code.</div>`
+        : `<div class="planhint"><b>Unlimited pilots</b> on your net.</div>`) +
+      `<div class="planhint">Need more seats or a renewal? <a style="color:var(--grn);border-bottom:1px dotted var(--grn)" href="${SERVICE}/subscribe">Manage your plan</a>.</div>`;
+  } else if (me.beta){
+    el.innerHTML = `<div class="planline"><span class="planname">OPEN BETA</span>
+        <span class="planmeta">FREE · EVERY FEATURE UNLOCKED</span></div>
+      <div class="planhint">You fly free while we tune it. When plans arrive
+      (from <b>$15/month for a two-ship</b>, scaling with your flight size),
+      <b>beta pilots keep their founding price</b>.</div>`;
+  } else {
+    el.innerHTML = `<div class="planline"><span class="planname">EXPIRED</span>
+        <span class="planmeta">THE BETA HAS ENDED</span></div>
+      <div class="planhint">Keep flying with a plan — from <b>$15/month for a two-ship</b>.
+      <a style="color:var(--grn);border-bottom:1px dotted var(--grn)" href="${SERVICE}/subscribe">Subscribe</a>
+      with the same email as this account.</div>`;
+  }
+}
 async function showProfile(){
   const {status, data: me} = await api("/me");
   if (status !== 200 || !me.ok){ localStorage.removeItem("wilco_sess"); return false; }
   $("auth").style.display = "none"; $("recover").style.display = "none";
   $("profile").classList.add("show");
+  $("p-who-h").textContent = (me.login || "").split("@")[0];
   $("p-who").textContent = me.login;
   let b = "";
-  if (me.beta) b += badge("b-beta", "BETA");
-  if (me.subscribed) b += badge("b-sub", "SUBSCRIBED");
+  if (me.subscribed) b += badge("b-sub", (me.plan || "SUBSCRIBED"));
+  else if (me.beta) b += badge("b-beta", "BETA");
   if (me.premium) b += badge("b-prem", "PREMIUM VOICES");
   if (me.unlimited) b += badge("b-unl", "UNLIMITED");
   if (me.vip) b += badge("b-vip", "VIP");
   if (me.admin) b += badge("b-adm", "ADMIN");
   $("p-badges").innerHTML = b;
   $("p-code").textContent = me.code;
+  renderPlan(me);
   if (me.unlimited){
     $("p-allow").innerHTML = `<span class="bignum">∞</span>
       <div class="meterlbl"><span>unlimited calls</span><span>${me.used_today} used today</span></div>`;
@@ -413,7 +504,7 @@ $("p-pwlink").onclick = () => $("pwform").classList.toggle("show");
 $("pw-go").onclick = async () => {
   const m = $("pwmsg");
   const {data} = await api("/me/password", {old: $("pw-old").value, new: $("pw-new").value});
-  m.style.color = data.ok ? "var(--acc)" : "var(--red)";
+  m.style.color = data.ok ? "var(--grn)" : "var(--red)";
   m.textContent = data.ok ? "Password updated." : (data.msg || "Failed.");
   if (data.ok){ $("pw-old").value = $("pw-new").value = "";
     setTimeout(() => $("pwform").classList.remove("show"), 1200); }
