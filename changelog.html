@@ -98,7 +98,39 @@
   your settings stay, done.</div>
 
   <div class="rel">
-    <div class="tag"><h2>Beta 26</h2><span class="date">JULY 12, 2026</span><span class="badge">LATEST</span></div>
+    <div class="tag"><h2>Beta 27</h2><span class="date">JULY 13, 2026</span><span class="badge">LATEST</span></div>
+    <ul>
+      <li><b>Every controller had holes — they're filled.</b> We audited the calls a pilot
+        makes on a normal sortie and found <b>7 of 13 weren't understood at all</b>. Some
+        that <i>did</i> "work" were worse than a miss: <b>"request line up and wait"</b> was
+        being answered with <b>CLEARED FOR TAKEOFF</b>. Line-up-and-wait is the
+        <i>opposite</i> of a takeoff clearance — you hold <i>on</i> the runway. That's a
+        runway incursion waiting to happen. It's now its own call, and it's safety-gated.</li>
+      <li><b>Tower</b> — line up and wait, the option / touch-and-go / closed traffic, and
+        the military overhead break ("initial", "break at midfield").</li>
+      <li><b>Ground</b> — pushback, and a real IFR departure clearance in CRAFT order:
+        cleared as fragged, climb and maintain, departure frequency, squawk.</li>
+      <li><b>Approach</b> — holding, with a fix, a turn direction and an
+        expect-further-clearance time.</li>
+      <li><b>Overlord</b> — the ROE ("are we weapons free?"), and <b>commit</b>
+        ("committing north group" used to be read as a <i>question about groups</i>).</li>
+      <li><b>Nail verifies your 9-line readback.</b> Real JTAC doctrine: the striker reads
+        back lines 4, 6 and 8 <i>before</i> anyone says "cleared hot". Nail never checked —
+        he'd brief you and just clear you. Now he won't clear you hot until the elevation
+        is right. A wrong one puts the bomb short, or long into the friendlies.</li>
+      <li><b>The exam doubled to 100,000 sentences — and got harder.</b> It now speaks
+        <b>non-native English</b> ("can you give me the picture", "i need to know the
+        weather") — the way half the playerbase actually talks — plus terse radio habits
+        and speech-to-text garble. Two exemptions were also removed that had been quietly
+        hiding failures. <b>Result: 95.9% understood, of 100,000 sentences stored
+        nowhere.</b> The exam paid for itself, catching "touch and go" filed under the
+        wrong intent, and "no more missiles" being answered with a <i>defensive notch</i>
+        instead of being sent home.</li>
+    </ul>
+  </div>
+
+  <div class="rel">
+    <div class="tag"><h2>Beta 26</h2><span class="date">JULY 12, 2026</span></div>
     <ul>
       <li><b>Real instrument approaches — at every airfield, on every map.</b> WILCO now
         reads the actual navaids out of DCS's own map files (38 ILS localizers on Sinai
