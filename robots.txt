@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://khossam963-png.github.io/wilco/sitemap.xml
